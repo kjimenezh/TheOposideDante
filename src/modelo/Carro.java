@@ -18,14 +18,15 @@ public class Carro {
         this.ancho = ancho;
         this.alto = alto;
         //Chasis chasis;
-        this.chasis = new Chasis(xref, yref, ancho, alto-5);
-        
-        //Llantas
-        
+        this.chasis = new Chasis(xref, yref, ancho, alto-5);   
     }
 
     public int getXref() {
         return xref;
+    }
+    
+    public void setrefY(int y){
+        yref = y;
     }
 
     public int getYref() {
@@ -40,21 +41,19 @@ public class Carro {
         return alto;
     }
     
-    
-       public void moverDerecha(){
+    public void moverDerecha(){
       this.xref++;
     }
+    
     public void moverIzquierda(){
       this.xref--;
     }
     
-    
     public void moverArriba(){
-      this.yref--;
+      this.yref = yref-3;
     }
     
-    
-     public void moverAbajo(){
+    public void moverAbajo(){
       this.yref++;
     }
 
@@ -65,6 +64,4 @@ public class Carro {
     public Llanta[] getLlantas() {
         return llantas;
     }
-    
-    
 }

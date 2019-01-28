@@ -22,7 +22,7 @@ public class EscenarioInteractivo extends Application{
         Pane layout  = new Pane();  
         Canvas canvas = new Canvas(1800,520);
         layout.getChildren().add(canvas);
-        Scene escena = new Scene(layout,1800,520);
+        Scene escena = new Scene(layout,300,520);
         
         GraphicsContext lapiz = canvas.getGraphicsContext2D();
         LoopJuego juego = new LoopJuego(escena, lapiz);
