@@ -11,15 +11,27 @@ public class Carro {
     private int alto;
     private Chasis chasis;
     private Llanta[] llantas;
+    private int xAbs;
 
-    public Carro(int xref, int yref, int ancho, int alto) {
+    public Carro(int xref, int yref, int ancho, int alto, int xAbs) {
         this.xref = xref;
         this.yref = yref;
         this.ancho = ancho;
         this.alto = alto;
         //Chasis chasis;
-        this.chasis = new Chasis(xref, yref, ancho, alto-5);   
+        this.chasis = new Chasis(xref, yref, ancho, alto-5);  
+        this.xAbs=xAbs;
     }
+
+    public int getxAbs() {
+        return xAbs;
+    }
+
+    public void setxAbs(int xAbs) {
+        this.xAbs = xAbs;
+    }
+    
+    
 
     public int getXref() {
         return xref;
@@ -27,6 +39,9 @@ public class Carro {
     
     public void setrefY(int y){
         yref = y;
+    }
+      public void setrefX(int x){
+        xref = x;
     }
 
     public int getYref() {

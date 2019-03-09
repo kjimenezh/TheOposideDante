@@ -33,7 +33,7 @@ public class LoopJuego extends AnimationTimer{
     public LoopJuego(Scene escena, GraphicsContext lapiz) {
         this.lapiz = lapiz;
         this.escena = escena;
-        this.carro = new Carro(0, 420, 30, 42);//ubicación del mensito v;
+        this.carro = new Carro(0, 420, 40, 52, 0);//ubicación del mensito v;
         this.fondo = new Image( "image/CITY_MEGA sin fondo.png" );
         this.edificios = new Image( "image/CITY_MEGA sin fondo.png" );
         this.edificio = new Image( "image/CITY_MEGA sin fondo.png" );
@@ -72,9 +72,23 @@ public class LoopJuego extends AnimationTimer{
         lapiz.clearRect(0, 0, 1800, 520);
         
         //Permite dibujar una imagen de fondo
-        lapiz.drawImage(fondo, 43, 2400, 1600, 320, 0, 0, 1800, 527);
-        lapiz.drawImage(edificios, 43, 2068, 1600, 268, 0, 89, 1800, 438);
-        lapiz.drawImage(edificio, 43, 1621, 1600, 235, 0, 297, 1800, 230);
+        //permite hacer que el escenario vaya moviendose en la ubicación 
+        if( carro.getxAbs()   < 395    ){      
+            if(carro.getxAbs() == 394){
+                carro.setrefX(359);
+            }
+            lapiz.drawImage(fondo, 43, 2400, 295, 320, 0, 0, 395, 520);
+            lapiz.drawImage(edificios, 43, 2068, 295, 268, 0, 89, 395, 438);
+            lapiz.drawImage(edificio, 43, 1621, 295, 235, 0, 204, 395, 330);
+        }else if(     carro.getxAbs() >= 395 && carro.getxAbs()< 790){
+            if(carro.getxAbs() == 395){
+                carro.setrefX(0);
+            }
+            lapiz.drawImage(fondo, 338, 2400, 295, 320, 0, 0, 395, 520);           
+            lapiz.drawImage(edificios, 338, 2068, 295, 268, 0, 89, 395, 438);
+            lapiz.drawImage(edificio, 338, 1621, 295, 235, 0, 204, 395, 330);
+            
+        }
                            
         lapiz.strokeRect(carro.getXref()+5, carro.getYref(), carro.getAncho(), carro.getAlto());
                       
@@ -108,23 +122,32 @@ public class LoopJuego extends AnimationTimer{
         }
         
         if (interseccion.getBoundsInLocal().getWidth() != -1) {
-            carro.setrefY(465);
+            carro.setrefY(455);
         }
         
         //Acciones de teclado
-        if (marca == "RIGHT")
-            lapiz.drawImage(mensito2, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 42, 42);
+        if (marca == "RIGHT"){
+            lapiz.drawImage(mensito2, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
+            
+       
+        }
         if (marca == "LEFT")
-            lapiz.drawImage(mensito, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 42, 42);
+            lapiz.drawImage(mensito, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
+
         if (pulsacionTeclado.contains("LEFT")){
+            //
             marca = "LEFT";
+            carro.setxAbs( carro.getxAbs()-1 );
+            System.out.println(carro.getXref());
             carro.moverIzquierda();
-            lapiz.drawImage(mensito, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 42, 42);
+            lapiz.drawImage(mensito, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
         }
         if (pulsacionTeclado.contains("RIGHT")){
             marca = "RIGHT";
+            carro.setxAbs( carro.getxAbs()+1 );
+            System.out.println(carro.getXref());
             carro.moverDerecha();
-            lapiz.drawImage(mensito2, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 42, 42);
+            lapiz.drawImage(mensito2, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
         }
         if (pulsacionTeclado.contains("UP"))
             carro.moverArriba();
