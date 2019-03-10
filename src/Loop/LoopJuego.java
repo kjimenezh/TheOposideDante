@@ -1,3 +1,5 @@
+package Loop;
+
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -8,7 +10,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.Shape;
-import modelo.Carro;
+import Personaje.Personaje;
+import static java.lang.Math.*;
 
 /**
  *
@@ -18,7 +21,7 @@ public class LoopJuego extends AnimationTimer{
     private Scene escena; //Para controlar los eventos del teclado y para el cambio de nivel.
     private GraphicsContext lapiz;
     
-    private Carro carro;
+    private Personaje carro;
     private Image fondo ;   
     private Image edificios;
     private Image edificio;
@@ -33,7 +36,7 @@ public class LoopJuego extends AnimationTimer{
     public LoopJuego(Scene escena, GraphicsContext lapiz) {
         this.lapiz = lapiz;
         this.escena = escena;
-        this.carro = new Carro(0, 420, 40, 52, 0);//ubicación del mensito v;
+        this.carro = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del mensito v;
         this.fondo = new Image( "image/CITY_MEGA sin fondo.png" );
         this.edificios = new Image( "image/CITY_MEGA sin fondo.png" );
         this.edificio = new Image( "image/CITY_MEGA sin fondo.png" );
@@ -128,8 +131,6 @@ public class LoopJuego extends AnimationTimer{
         //Acciones de teclado
         if (marca == "RIGHT"){
             lapiz.drawImage(mensito2, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
-            
-       
         }
         if (marca == "LEFT")
             lapiz.drawImage(mensito, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
@@ -149,8 +150,11 @@ public class LoopJuego extends AnimationTimer{
             carro.moverDerecha();
             lapiz.drawImage(mensito2, 32*this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
         }
-        if (pulsacionTeclado.contains("UP"))
-            carro.moverArriba();
+        if (pulsacionTeclado.contains("UP")){
+            if (pulsacionTeclado.contains("RIGHT")&& carro.getYref()>=450.0) {
+                carro.setrefY((200.0/30625.0)*(carro.getXref())+307.0);
+            }
+        }
         if (pulsacionTeclado.contains("DOWN"))
             carro.moverAbajo();
         
