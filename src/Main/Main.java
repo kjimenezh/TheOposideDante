@@ -1,6 +1,6 @@
 package Main;
 
-import Loop.LoopJuego;
+import Loop1.LoopJuego;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -17,9 +17,9 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         Pane layout  = new Pane();  
-        Canvas canvas = new Canvas(410,520);
+        Canvas canvas = new Canvas(810,520);
         layout.getChildren().add(canvas);
-        Scene escena = new Scene(layout,395,520);
+        Scene escena = new Scene(layout,796,520);
         
         GraphicsContext lapiz = canvas.getGraphicsContext2D();
         LoopJuego juego = new LoopJuego(escena, lapiz);

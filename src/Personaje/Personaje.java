@@ -10,14 +10,14 @@ import javafx.stage.Stage;
  * @author Jhon
  */
 public class Personaje {
-    private Scene scene;
+    //private Scene scene;
     private double xref;
     private double yref;
     private int ancho;
     private int alto;
-    private int xAbs;
+    private double xAbs;
 
-    public Personaje(double xref, double yref, int ancho, int alto, int sAbs) {
+    public Personaje(double xref, double yref, int ancho, int alto, double sAbs) {
         this.xref = xref;
         this.yref = yref;
         this.ancho = ancho;
@@ -33,7 +33,7 @@ public class Personaje {
         return yref;
     }
 
-    public int getxAbs() {
+    public double getxAbs() {
         return xAbs;
     }
 
@@ -53,16 +53,16 @@ public class Personaje {
         this.alto = alto;
     }
 
-    public void setxAbs(int xAbs) {
+    public void setxAbs(double xAbs) {
         this.xAbs = xAbs;
     }
     
     public void moverDerecha(){
-        this.xref++;
+        xref = xref+2;
     }
     
     public void moverIzquierda(){
-        this.xref--;
+        xref = xref-2;
     }
     
     public void moverArriba(){
@@ -81,14 +81,15 @@ public class Personaje {
         
     }
     
-    /*public void saltarmoviendose(){
-        this.yref = -((2*tan(toRadians(45))) - ((10*(2*2))/(2*(cos(toRadians(45))*cos(toRadians(45))))));
-        /*xref = sin(toRadians(90))/10;
-        yref = sin(toRadians(90))/20;
-    }*/
+    public void saltarmoviendose(){
+        for (int i = 0; i < 100; i = i+2) {
+            yref = (200.0/30625.0)*(i)+307.0;
+        }
+        
+    }
     
     public void moverAbajo(){
         this.yref = this.yref + 2.5;
-        System.out.println("Altura : " + yref);
+        //System.out.println("Altura : " + yref);
     }
 }
