@@ -1,4 +1,4 @@
-package Enemigosimple;
+package Objetos;
 
 /**
  *

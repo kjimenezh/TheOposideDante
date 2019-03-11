@@ -1,4 +1,4 @@
-package Personaje;
+package Objetos;
 
 import static java.lang.Math.*;
 import javafx.scene.Scene;
