@@ -39,8 +39,8 @@ public class Enemigosimple extends Thread{
         for (int i = 0; i < 300; i++) {
             xref--;
         }
-        for (int i = 0; i < 300; i++) {
+        /*for (int i = 0; i < 300; i++) {
             xref++;
-        }
+        }*/
     }
 }

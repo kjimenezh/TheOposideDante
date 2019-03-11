@@ -1,5 +1,6 @@
-package Loop1;
+package Loop2;
 
+import Loop1.*;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Estudiante
  */
-public class LoopJuego extends AnimationTimer {
+public class Loop extends AnimationTimer {
 
     private Scene escena; //Para controlar los eventos del teclado y para el cambio de nivel.
     private GraphicsContext lapiz;
@@ -40,7 +41,7 @@ public class LoopJuego extends AnimationTimer {
     private ArrayList<String> pulsacionTeclado = null;
     private int salto = 0; //Indicador del salto
 
-    public LoopJuego(Scene escena, GraphicsContext lapiz) {
+    public Loop(Scene escena, GraphicsContext lapiz) {
         this.lapiz = lapiz;
         this.escena = escena;
         this.carro = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del mensito v;
@@ -97,19 +98,6 @@ public class LoopJuego extends AnimationTimer {
         //Permite dibujar una imagen de fondo
         //permite hacer que el escenario vaya moviendose en la ubicación 
         if (carro.getxAbs() < 796) {
-            if (carro.getxAbs() == 794) {
-                carro.setrefX(760);
-            }
-            Shape pared = new Rectangle(-20, 400, 2, 150);
-            lapiz.drawImage(fondo, 43, 2400, 696, 320, 0, 0, 796, 520);
-            lapiz.drawImage(fondo, 43, 2068, 696, 268, 0, 89, 796, 438);
-            lapiz.drawImage(fondo, 43, 1621, 696, 235, 0, 204, 796, 330);
-            Shape interseccion = SVGPath.intersect(sChasis, pared);
-            if (interseccion.getBoundsInLocal().getWidth() != -1) {
-                carro.setrefX(-22);
-                carro.setxAbs(-20);
-            } 
-        } else if (carro.getxAbs() >= 796 && carro.getxAbs() < 1592) {
             if (carro.getxAbs() == 796) {//796
                 carro.setrefX(0);//0
             }
@@ -143,7 +131,6 @@ public class LoopJuego extends AnimationTimer {
         } 
 
         //lapiz.strokeRect(carro.getXref() + 5, carro.getYref(), carro.getAncho(), carro.getAlto());
-        
 
         //Obstaculos (imagen)
         //lapiz.fillRect(100, 100, 20, 20);

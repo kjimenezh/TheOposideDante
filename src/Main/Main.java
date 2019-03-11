@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class Main extends Application{
 /**
  *
- * @author Estudiante
+* @author Estudiante
  */
     @Override
     public void start(Stage primaryStage) throws Exception {
