@@ -77,19 +77,19 @@ public class Personaje {
         return alto;
     }
     
-    public void saltarquieto(){
-        
-    }
-    
     public void saltarmoviendose(){
+        /*
+        double aux = yref;
         for (int i = 0; i < 100; i = i+2) {
             yref = (200.0/30625.0)*(i)+307.0;
         }
-        
+        System.out.println((yref - aux)+"dfksfkdsfjdsjkfhsdkjfhdkjfhdskhf");
+        */
+        this.yref -= 5 + 150/30;
     }
     
     public void moverAbajo(){
-        this.yref = this.yref + 2.5;
+        this.yref = this.yref + 5;
         //System.out.println("Altura : " + yref);
     }
 }

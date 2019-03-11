@@ -20,9 +20,6 @@ import javafx.scene.control.Label;
 public class FXMLMenuController implements Initializable {
     
     @FXML
-    private Label label;
-    
-    @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
         System.out.println("Iniciando juego...");
         Modelo modelo = new Modelo();

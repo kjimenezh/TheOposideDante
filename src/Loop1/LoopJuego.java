@@ -34,6 +34,7 @@ public class LoopJuego extends AnimationTimer {
     private int contador = 100;
     private String marca = "RIGHT";
     private ArrayList<String> pulsacionTeclado = null;
+    private int salto = 0; //Indicador del salto
 
     public LoopJuego(Scene escena, GraphicsContext lapiz) {
         this.lapiz = lapiz;
@@ -56,8 +57,7 @@ public class LoopJuego extends AnimationTimer {
             }
         });
 
-        escena.setOnKeyReleased(
-                new EventHandler<KeyEvent>() {
+        escena.setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent e) {
                 String code = e.getCode().toString();
                 pulsacionTeclado.remove(code);
@@ -173,18 +173,23 @@ public class LoopJuego extends AnimationTimer {
             carro.moverDerecha();
             lapiz.drawImage(mensito2, 32 * this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
         }
-        if (pulsacionTeclado.contains("UP")) {
-            if (pulsacionTeclado.contains("RIGHT") && carro.getYref() >= 450.0) {
+        if ((pulsacionTeclado.contains("UP"))&&(carro.getYref()==455.0)) {
+            //if ((pulsacionTeclado.contains("RIGHT")||(pulsacionTeclado.contains("LEFT"))) && carro.getYref() >= 450.0) {
                 //carro.setrefY((200.0/30625.0)*(carro.getXref())+307.0);
-                carro.saltarmoviendose();
-            }
+                salto = 30;
+                //carro.saltarmoviendose();
+            //}
+        }
+        if (salto>0) {
+            carro.saltarmoviendose();
+            this.salto--;
         }
         if (pulsacionTeclado.contains("DOWN")) {
             carro.moverAbajo();
         }
 
         //imagen de la puntuacion
-        lapiz.strokeText("Puntaje: " + contador, 200, 10);
+        lapiz.strokeText("Salto: " + carro.getYref(), 200, 10);
 
         this.numero++;
     }
