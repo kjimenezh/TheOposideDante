@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers;
+package Main;
 
 import modelo.Modelo;
-import Controllers.MenuController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

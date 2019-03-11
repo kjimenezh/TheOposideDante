@@ -1,4 +1,4 @@
-package Vistas;
+package Main;
 
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
@@ -38,6 +38,7 @@ public class LoopJuego extends AnimationTimer {
     private int contador = 100;
     private String marca = "RIGHT";
     private ArrayList<String> pulsacionTeclado = null;
+    private Image heart;
     private int salto = 0; //Indicador del salto
 
     public LoopJuego(Scene escena, GraphicsContext lapiz) {
@@ -45,10 +46,11 @@ public class LoopJuego extends AnimationTimer {
         this.escena = escena;
         this.carro = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del mensito v;
         this.esqueleto = new Enemigosimple(750, 425, 40, 52);
-        this.fondo = new Image("image/CITY_MEGA sin fondo.png");
-        this.mensito2 = new Image("image/rogue spritesheet calciumtrice.png");
-        this.mensito = new Image("image/rogue spritesheet calciumtrice IZ.png");
-        this.esqueletoim = new Image("image/rpgcritter update formatted transparent.png");
+        this.heart = new Image("Images/heart.png");
+        this.fondo = new Image("Images/CITY_MEGA sin fondo.png");
+        this.mensito2 = new Image("Images/rogue spritesheet calciumtrice.png");
+        this.mensito = new Image("Images/rogue spritesheet calciumtrice IZ.png");
+        this.esqueletoim = new Image("Images/rpgcritter update formatted transparent.png");
         pulsacionTeclado = new ArrayList<>();
 
         escena.setOnKeyPressed(
@@ -208,7 +210,9 @@ public class LoopJuego extends AnimationTimer {
         }
 
         //imagen de la puntuacion
-        lapiz.strokeText("Salto: " + carro.getYref(), 200, 10);
+        lapiz.drawImage(heart, 0, 0, 64, 64, 50,5, 20,20);
+        int vidas = 3;
+        lapiz.strokeText("= " + vidas, 72, 17);
 
         this.numero++;
     }

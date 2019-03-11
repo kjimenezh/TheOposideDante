@@ -1,8 +1,6 @@
 package Main;
 
 import modelo.Modelo;
-import Controllers.MenuController;
-import Vistas.LoopJuego;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

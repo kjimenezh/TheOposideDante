@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vistas;
+package Main;
 
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;

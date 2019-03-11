@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers;
+package Main;
 
+import Main.LoopJuegoController;
 import modelo.Modelo;
 import Main.Singleton;
 import java.io.IOException;
