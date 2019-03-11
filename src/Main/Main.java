@@ -27,6 +27,7 @@ public class Main extends Application{
         //invocar el controlador de la vista que quiero visualizar
         MenuController ventanaMenu = new MenuController(modelo);
         ventanaMenu.mostrarVista();
+        System.out.println("ver");
     }
     public static void main(String[] args) {
         launch(args);
