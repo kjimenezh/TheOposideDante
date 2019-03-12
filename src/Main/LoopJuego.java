@@ -27,11 +27,15 @@ public class LoopJuego extends AnimationTimer {
     private Image esqueletoim;
     private Enemigosimple esqueleto;
     private Image ninjaImD;
+    private Image ninjaImDN;
     private Image ninjaImI;
+    private Image ninjaImIN;
     private boolean comprobacion = false;
     private int secuencia = 0;
     private int secuencia2 = 0;
     private int numero;
+    private int tiempovida = 0;
+    private int vidas = 3;
     private int contador = 100;
     private String marca = "RIGHT";
     private ArrayList<String> pulsacionTeclado = null;
@@ -48,7 +52,9 @@ public class LoopJuego extends AnimationTimer {
         this.heart = new Image("Images/heart.png");
         this.fondo = new Image("Images/CITY_MEGA sin fondo.png");
         this.ninjaImD = new Image("Images/rogue spritesheet calciumtrice.png");
+        this.ninjaImDN = new Image("Images/rogue spritesheet calciumtrice negativo.png");
         this.ninjaImI = new Image("Images/rogue spritesheet calciumtrice IZ.png");
+        this.ninjaImIN = new Image("Images/rogue spritesheet calciumtrice IZnegativo.png");
         this.esqueletoim = new Image("Images/rpgcritter update formatted transparent.png");
         pulsacionTeclado = new ArrayList<>();
 
@@ -75,10 +81,15 @@ public class LoopJuego extends AnimationTimer {
     public void handle(long now) {
         if (pulsacionTeclado.contains("P") && debounceP == 0) { //oprimir P para pausar
             pausa = !pausa;
-            debounceP = 10;
+            debounceP = 15;
         }
-        if (!pausa) {
+        if(vidas<0){
+            Image fondibiris = new Image("Images/inicio.png");
+            lapiz.drawImage(fondibiris, now, now, now, now, now, now, now, now);
+        }
+        else if (!pausa) {
             lapiz.clearRect(0, 0, 1800, 520);
+            
 
             if (this.numero % 10 == 0) {
                 if (this.secuencia == 9) {
@@ -96,7 +107,7 @@ public class LoopJuego extends AnimationTimer {
                 }
             }
             //shape del personaje
-            Shape sNinja = new Rectangle(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho()-5, ninja.getAlto());
+            Shape sNinja = new Rectangle(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho() - 5, ninja.getAlto());
             Shape sEsqueleto = new Rectangle(esqueleto.getXref(), esqueleto.getYref(), 23, 38);
 
             //Permite dibujar una imagen de fondo
@@ -138,11 +149,11 @@ public class LoopJuego extends AnimationTimer {
                 Shape pared2 = new Rectangle(804, 400, 2, 150);
 
                 Shape inter = SVGPath.intersect(sNinja, sEsqueleto);
-                
+
                 lapiz.drawImage(fondo, 736, 2400, 696, 320, 0, 0, 796, 520);
                 lapiz.drawImage(fondo, 736, 2068, 696, 268, 0, 89, 796, 438);
                 lapiz.drawImage(fondo, 736, 1621, 696, 235, 0, 204, 796, 330);
-                
+
                 Shape interseccion = SVGPath.intersect(sNinja, pared);
                 Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
                 Shape interseccionEsqueleto1 = SVGPath.intersect(sEsqueleto, pared);
@@ -177,9 +188,12 @@ public class LoopJuego extends AnimationTimer {
                 /*if (interseccion.getBoundsInLocal().getWidth() != -1) {
                     ninja.setrefX(2);
                 }*/
-                if (inter.getBoundsInLocal().getWidth() != -1) {
-                    System.out.println("Holi");
+                if (inter.getBoundsInLocal().getWidth() != -1 && tiempovida == 0) {
+                    System.out.println("Se ha chocado con el esqueleto");
+                    vidas--;
+                    tiempovida = 50;
                 }
+
             } else if (ninja.getxAbs() >= 1592 && ninja.getxAbs() < 2388) {
                 if (ninja.getxAbs() == 1592) {
                     ninja.setrefX(0);
@@ -198,7 +212,7 @@ public class LoopJuego extends AnimationTimer {
                     ninja.setrefX(5);
                     ninja.setxAbs(8);
                 } */
-                /*if (interseccion2.getBoundsInLocal().getWidth() != -1) {
+ /*if (interseccion2.getBoundsInLocal().getWidth() != -1) {
                     ninja.setrefX(760);
                     ninja.setxAbs(2350);
                     System.out.println("esta en colision");
@@ -270,15 +284,25 @@ public class LoopJuego extends AnimationTimer {
 
             //imagen de la puntuacion
             lapiz.drawImage(heart, 0, 0, 64, 64, 50, 5, 20, 20);
-            int vidas = 3;
             lapiz.strokeText("= " + vidas, 72, 17);
 
             this.numero++;
+            if (tiempovida > 0) {
+                tiempovida--;
+                //Animaciones en negativo    
+                if (marca == "RIGHT") {
+                    lapiz.drawImage(ninjaImDN, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
+                }
+                if (marca == "LEFT") {
+                    lapiz.drawImage(ninjaImIN, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
+                }
+            }
         } else {
             lapiz.strokeText("PAUSA, presiona P para continuar", 100, 50);
         }
         if (debounceP > 0) { //Antirrebote para la tecla P
             debounceP--;
+
         }
     }
 }
