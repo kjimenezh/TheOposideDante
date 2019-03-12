@@ -29,6 +29,8 @@ public class LoopJuego extends AnimationTimer {
     private Modelo model;
     private Personaje ninja;
     private Image fondo;
+    private Image fondo2;
+    private Image fondo3;
     private Image esqueletoim;
     private Enemigosimple esqueleto;
     private Image ninjaImD;
@@ -57,6 +59,8 @@ public class LoopJuego extends AnimationTimer {
         this.esqueleto = new Enemigosimple(720, 478, 45, 57);
         this.heart = new Image("Images/heart.png");
         this.fondo = new Image("Images/CITY_MEGA sin fondo.png");
+        this.fondo2 = new Image("Images/Nivel2.png");
+        this.fondo3 = new Image("Images/Nivel3.png");
         this.ninjaImD = new Image("Images/rogue spritesheet calciumtrice.png");
         this.ninjaImDN = new Image("Images/rogue spritesheet calciumtrice negativo.png");
         this.ninjaImI = new Image("Images/rogue spritesheet calciumtrice IZ.png");
@@ -142,13 +146,13 @@ public class LoopJuego extends AnimationTimer {
                     ninja.setxAbs(-20);
                 }
                 //Activar pared2 escenario º
-                /* if (interseccion2.getBoundsInLocal().getWidth() !=-1) {
+                 if (interseccion2.getBoundsInLocal().getWidth() !=-1) {
                     ninja.setrefX(760);
                     ninja.setxAbs(758);
                      System.out.println("esta en colision");
                      System.out.println(interseccion2.getBoundsInLocal().getWidth());
                     
-               }*/
+               }
             } else if (ninja.getxAbs() >= 796 && ninja.getxAbs() < 1592) {
                 if (ninja.getxAbs() == 796) {//796
                     ninja.setrefX(0);//0
@@ -158,17 +162,15 @@ public class LoopJuego extends AnimationTimer {
                 //el personaje se posiciona en abs
                 Shape pared = new Rectangle(4, 400, 2, 150);
                 Shape pared2 = new Rectangle(804, 400, 2, 150);
-
-                Shape inter = SVGPath.intersect(sNinja, sEsqueleto);
-
-                lapiz.drawImage(fondo, 736, 2400, 696, 320, 0, 0, 796, 520);
-                lapiz.drawImage(fondo, 736, 2068, 696, 268, 0, 89, 796, 438);
-                lapiz.drawImage(fondo, 736, 1621, 696, 235, 0, 204, 796, 330);
-
                 Shape interseccion = SVGPath.intersect(sNinja, pared);
                 Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
                 Shape interseccionEsqueleto1 = SVGPath.intersect(sEsqueleto, pared);
                 Shape interseccionEsqueleto2 = SVGPath.intersect(sEsqueleto, pared2);
+
+                Shape inter = SVGPath.intersect(sNinja, sEsqueleto);
+
+                lapiz.drawImage(fondo2, 0,0, 769, 286, 0, 0, 796, 520);
+                
                 //Activar paredes escenario 2
                 /*if (interseccion.getBoundsInLocal().getWidth() != -1) {
                     System.out.println("esta en colicion");
@@ -212,23 +214,27 @@ public class LoopJuego extends AnimationTimer {
 
                 Shape pared = new Rectangle(3, 400, 2, 150);
                 Shape pared2 = new Rectangle(804, 400, 2, 150);
-                lapiz.drawImage(fondo, 43, 2400, 696, 320, 0, 0, 796, 520);
-                lapiz.drawImage(fondo, 43, 1836, 696, 20, 0, 507, 796, 20);
+                
                 Shape interseccion = SVGPath.intersect(sNinja, pared);
                 Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
-                //Activar paredes escenario 2
+                
+                lapiz.drawImage(fondo3, 0, 0, 492, 233, 0, 0, 796, 520);
+                
+                //Activar paredes escenario 3
                 /*if (interseccion.getBoundsInLocal().getWidth() != -1) {
                     System.out.println("esta en colicion");
+                    System.out.println(ninja.getxAbs());
                     System.out.println(interseccion.getBoundsInLocal().getWidth());
-                    ninja.setrefX(5);
-                    ninja.setxAbs(8);
-                } */
- /*if (interseccion2.getBoundsInLocal().getWidth() != -1) {
-                    ninja.setrefX(760);
-                    ninja.setxAbs(2350);
+                    ninja.setrefX(4);
+                    ninja.setxAbs(1596);
+                }
+                if (interseccion2.getBoundsInLocal().getWidth() != -1) {
+                    ninja.setrefX(750);
+                    System.out.println(ninja.getxAbs());
                     System.out.println("esta en colision");
+                    ninja.setxAbs(2342);
                     System.out.println(interseccion2.getBoundsInLocal().getWidth());
-
+                    System.out.println(ninja.getxAbs());
                 }*/
             }
 
