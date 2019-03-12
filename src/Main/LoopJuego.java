@@ -12,6 +12,10 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.Shape;
 import Objetos.Personaje;
 import Objetos.Enemigosimple;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelo.Modelo;
 
 /**
  *
@@ -22,6 +26,7 @@ public class LoopJuego extends AnimationTimer {
     private Scene escena; //Para controlar los eventos del teclado y para el cambio de nivel.
     private GraphicsContext lapiz;
 
+    private Modelo model;
     private Personaje ninja;
     private Image fondo;
     private Image esqueletoim;
@@ -44,7 +49,8 @@ public class LoopJuego extends AnimationTimer {
     private boolean pausa = false; //Indicador de pausa
     private int debounceP = 0; //Antirrebote para la pausa
 
-    public LoopJuego(Scene escena, GraphicsContext lapiz) {
+    public LoopJuego(Scene escena, GraphicsContext lapiz, Modelo modelo) {
+        
         this.lapiz = lapiz;
         this.escena = escena;
         this.ninja = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del ninjaImI v;
@@ -84,8 +90,13 @@ public class LoopJuego extends AnimationTimer {
             debounceP = 15;
         }
         if(vidas<0){
-            Image fondibiris = new Image("Images/inicio.png");
-            lapiz.drawImage(fondibiris, now, now, now, now, now, now, now, now);
+            MenuController controller = new MenuController(model);
+            try {
+                controller.mostrarVista();
+            } catch (IOException ex) {
+                Logger.getLogger(LoopJuego.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            vidas=3;
         }
         else if (!pausa) {
             lapiz.clearRect(0, 0, 1800, 520);
