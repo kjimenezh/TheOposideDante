@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,8 +8,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="810.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Main.FXMLMenuController">
+<AnchorPane id="AnchorPane" prefHeight="453.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.FXMLMenuController">
     <children>
+      <ImageView fitHeight="520.0" fitWidth="810.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="Images/inicio.png" />
+         </image></ImageView>
         <Button fx:id="button" layoutX="223.0" layoutY="160.0" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="364.0" text="Start!">
          <font>
             <Font size="46.0" />
