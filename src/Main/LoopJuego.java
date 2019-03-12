@@ -93,8 +93,9 @@ public class LoopJuego extends AnimationTimer {
                 this.secuencia2++;
             }
         }
-        
+        //shape del personaje
         Shape sChasis = new Rectangle(carro.getXref() + 5, carro.getYref(), carro.getAncho(), carro.getAlto());
+        Shape ses = new Rectangle(esqueleto.getXref(), esqueleto.getYref(), 30, 42);
 
         //Permite dibujar una imagen de fondo
         //permite hacer que el escenario vaya moviendose en la ubicación 
@@ -117,6 +118,7 @@ public class LoopJuego extends AnimationTimer {
             }
             Shape pared = new Rectangle(0, 400, 2, 150);
             Shape interseccion = SVGPath.intersect(sChasis, pared);
+            Shape inter = SVGPath.intersect(sChasis, ses);
             lapiz.drawImage(fondo, 736, 2400, 696, 320, 0, 0, 796, 520);
             lapiz.drawImage(fondo, 736, 2068, 696, 268, 0, 89, 796, 438);
             lapiz.drawImage(fondo, 736, 1621, 696, 235, 0, 204, 796, 330);
@@ -128,7 +130,10 @@ public class LoopJuego extends AnimationTimer {
             }
             if (interseccion.getBoundsInLocal().getWidth() != -1) {
                 carro.setrefX(2);
-            } 
+            }
+            if (inter.getBoundsInLocal().getWidth() != -1) {
+                System.out.println("Holi");
+            }
         } else if (carro.getxAbs() >= 1592 && carro.getxAbs() < 2388) {
             if (carro.getxAbs() == 1592) {
                 carro.setrefX(0);
@@ -175,8 +180,8 @@ public class LoopJuego extends AnimationTimer {
             //
             marca = "LEFT";
             carro.setxAbs(carro.getxAbs() - 2);
-            System.out.println(carro.getXref());
-            System.out.println("ABS: " + carro.getxAbs());
+//            System.out.println(carro.getXref());
+//            System.out.println("ABS: " + carro.getxAbs());
             carro.moverIzquierda();
             lapiz.drawImage(mensito, 32 * this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
         }
