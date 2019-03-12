@@ -5,13 +5,12 @@
  */
 package Main;
 
-import Main.LoopJuegoController;
 import modelo.Modelo;
-import Main.Singleton;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -32,7 +31,8 @@ public class MenuController{
     public void mostrar(Stage stage) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("FXMLMenu.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("Menu");
+        stage.setTitle("The Oposide Dante");
+        stage.getIcons().add(new Image("Images/icon.png")); 
         stage.setScene(scene);
         stage.show();
     }

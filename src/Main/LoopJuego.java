@@ -12,9 +12,6 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.Shape;
 import Objetos.Personaje;
 import Objetos.Enemigosimple;
-import static java.lang.Math.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

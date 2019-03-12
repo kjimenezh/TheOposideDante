@@ -5,15 +5,12 @@
  */
 package Main;
 
-import Main.LoopJuego;
 import modelo.Modelo;
-import Main.Singleton;
 import java.io.IOException;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -41,7 +38,8 @@ public class LoopJuegoController {
         LoopJuego juego = new LoopJuego(escena, lapiz);
         juego.start();
         stage.setScene(escena);
-        stage.setTitle("Juego");
+        stage.setTitle("The Oposide Dante");
+        stage.getIcons().add(new Image("Images/icon.png"));
         stage.show();
     }
 }
