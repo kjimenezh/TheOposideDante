@@ -73,9 +73,9 @@ public class LoopJuego extends AnimationTimer {
 
     @Override
     public void handle(long now) {
-        if (pulsacionTeclado.contains("P")&&debounceP==0) { //oprimir P para pausar
+        if (pulsacionTeclado.contains("P") && debounceP == 0) { //oprimir P para pausar
             pausa = !pausa;
-            debounceP=10;
+            debounceP = 10;
         }
         if (!pausa) {
             lapiz.clearRect(0, 0, 1800, 520);
@@ -97,8 +97,7 @@ public class LoopJuego extends AnimationTimer {
             }
             //shape del personaje
             Shape sNinja = new Rectangle(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho(), ninja.getAlto());
-            Shape sEsqueleto
-                    = new Rectangle(esqueleto.getXref(), esqueleto.getYref(), 30, 42);
+            Shape sEsqueleto = new Rectangle(esqueleto.getXref(), esqueleto.getYref(), 30, 42);
 
             //Permite dibujar una imagen de fondo
             //permite hacer que el escenario vaya moviendose en la ubicación 
@@ -107,29 +106,62 @@ public class LoopJuego extends AnimationTimer {
                     ninja.setrefX(760);
                 }
                 Shape pared = new Rectangle(-20, 400, 2, 150);
+                Shape pared2 = new Rectangle(804, 400, 2, 150);
                 lapiz.drawImage(fondo, 43, 2400, 696, 320, 0, 0, 796, 520);
                 lapiz.drawImage(fondo, 43, 2068, 696, 268, 0, 89, 796, 438);
                 lapiz.drawImage(fondo, 43, 1621, 696, 235, 0, 204, 796, 330);
+
                 Shape interseccion = SVGPath.intersect(sNinja, pared);
+                Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
                 if (interseccion.getBoundsInLocal().getWidth() != -1) {
+                    System.out.println("esta en colicion");
+                    System.out.println(interseccion.getBoundsInLocal().getWidth());
                     ninja.setrefX(-22);
                     ninja.setxAbs(-20);
-                } 
+                }
+                //Activar pared2 escenario º
+                /* if (interseccion2.getBoundsInLocal().getWidth() !=-1) {
+                    ninja.setrefX(760);
+                    ninja.setxAbs(758);
+                     System.out.println("esta en colision");
+                     System.out.println(interseccion2.getBoundsInLocal().getWidth());
+                    
+               }*/
             } else if (ninja.getxAbs() >= 796 && ninja.getxAbs() < 1592) {
                 if (ninja.getxAbs() == 796) {//796
                     ninja.setrefX(0);//0
                 }
-                Shape pared = new Rectangle(0, 400, 2, 150);
-                Shape interseccion = SVGPath.intersect(sNinja, pared);
+                //las paredes se crean segun la actualizacion del personaje
+                //el personaje reinicia refx al cruzar la division
+                //el personaje se posiciona en abs
+                Shape pared = new Rectangle(4, 400, 2, 150);
+                Shape pared2 = new Rectangle(804, 400, 2, 150);
+
                 Shape inter = SVGPath.intersect(sNinja, sEsqueleto
                 );
                 lapiz.drawImage(fondo, 736, 2400, 696, 320, 0, 0, 796, 520);
                 lapiz.drawImage(fondo, 736, 2068, 696, 268, 0, 89, 796, 438);
                 lapiz.drawImage(fondo, 736, 1621, 696, 235, 0, 204, 796, 330);
+                Shape interseccion = SVGPath.intersect(sNinja, pared);
+                Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
+                //Activar paredes escenario 2
+                /*if (interseccion.getBoundsInLocal().getWidth() != -1) {
+                    System.out.println("esta en colicion");
+                    System.out.println(interseccion.getBoundsInLocal().getWidth());
+                    ninja.setrefX(5);
+                    ninja.setxAbs(798);
+                } 
+                if (interseccion2.getBoundsInLocal().getWidth() !=-1) {
+                    ninja.setrefX(760);
+                    ninja.setxAbs(1563);
+                     System.out.println("esta en colision");
+                     System.out.println(interseccion2.getBoundsInLocal().getWidth());
+                    
+               }*/
                 if (esqueleto.getXref() < 780) {
                     esqueleto.moverizquierda();
-                    lapiz.drawImage(esqueletoim, 96+16*this.secuencia2, 111, 16, 17, esqueleto.getXref(), esqueleto.getYref(), 26, 27);//animacion esqueleto
-                } else if(esqueleto.getXref() == 0){
+                    lapiz.drawImage(esqueletoim, 96 + 16 * this.secuencia2, 111, 16, 17, esqueleto.getXref(), esqueleto.getYref(), 26, 27);//animacion esqueleto
+                } else if (esqueleto.getXref() == 0) {
                     esqueleto.moverderecha();
                 }
                 if (interseccion.getBoundsInLocal().getWidth() != -1) {
@@ -142,42 +174,37 @@ public class LoopJuego extends AnimationTimer {
                 if (ninja.getxAbs() == 1592) {
                     ninja.setrefX(0);
                 }
-                
-                Shape pared = new Rectangle(-20, 400, 2, 150);
-                Shape interseccion = SVGPath.intersect(sNinja, pared);
-                Shape inter = SVGPath.intersect(sNinja, sEsqueleto
-                );
+
+                Shape pared = new Rectangle(3, 400, 2, 150);
+                Shape pared2 = new Rectangle(804, 400, 2, 150);
                 lapiz.drawImage(fondo, 43, 2400, 696, 320, 0, 0, 796, 520);
                 lapiz.drawImage(fondo, 43, 1836, 696, 20, 0, 507, 796, 20);
-                Shape pared2 = new Rectangle(-20, 400, 2, 150);
-                //Shape interseccion = SVGPath.intersect(sNinja, pared);
-                //Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
-                if (esqueleto.getXref() < 780) {
-                    esqueleto.moverizquierda();
-                    lapiz.drawImage(esqueletoim, 96+16*this.secuencia2, 111, 16, 17, esqueleto.getXref(), esqueleto.getYref(), 26, 27);//animacion esqueleto
-                } else if(esqueleto.getXref() == 0){
-                    esqueleto.moverderecha();
+                Shape interseccion = SVGPath.intersect(sNinja, pared);
+                Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
+                //Activar paredes escenario 2
+                /*if (interseccion.getBoundsInLocal().getWidth() != -1) {
+                    System.out.println("esta en colicion");
+                    System.out.println(interseccion.getBoundsInLocal().getWidth());
+                    ninja.setrefX(5);
+                    ninja.setxAbs(8);
+                } */
+                if (interseccion2.getBoundsInLocal().getWidth() != -1) {
+                    ninja.setrefX(760);
+                    ninja.setxAbs(2350);
+                    System.out.println("esta en colision");
+                    System.out.println(interseccion2.getBoundsInLocal().getWidth());
+
                 }
-                if (interseccion.getBoundsInLocal().getWidth() != -1) {
-                    ninja.setrefX(2);
-                }
-                if (inter.getBoundsInLocal().getWidth() != -1) {
-                    System.out.println("Holi");
-                }
-            } 
+            }
 
             //lapiz.strokeRect(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho(), ninja.getAlto());
-
-
             //Obstaculos (imagen)
             //lapiz.fillRect(100, 100, 20, 20);
             //lapiz.strokeRect(0, 507, 1800, 20);
-
             //movimiento de "gravedad"
             ninja.moverAbajo();
 
             //Validando colision
-
             //Obstaculos(programados)
             Shape sObstaculo = new Rectangle(100, 100, 20, 20);
             Shape bObstaculo = new Rectangle(0, 503, 1800, 20);
@@ -200,8 +227,8 @@ public class LoopJuego extends AnimationTimer {
                 //
                 marca = "LEFT";
                 ninja.setxAbs(ninja.getxAbs() - 2);
-    //            System.out.println(ninja.getXref());
-    //            System.out.println("ABS: " + ninja.getxAbs());
+                //            System.out.println(ninja.getXref());
+                //            System.out.println("ABS: " + ninja.getxAbs());
                 ninja.moverIzquierda();
                 lapiz.drawImage(ninjaImI, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
             }
@@ -213,11 +240,11 @@ public class LoopJuego extends AnimationTimer {
                 ninja.moverDerecha();
                 lapiz.drawImage(ninjaImD, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
             }
-            if ((pulsacionTeclado.contains("UP"))&&(ninja.getYref()==455.0)) {
+            if ((pulsacionTeclado.contains("UP")) && (ninja.getYref() == 455.0)) {
                 salto = 20;
 
             }
-            if (salto>0) {
+            if (salto > 0) {
                 ninja.saltarmoviendose();
                 if (marca == "RIGHT") {
                     lapiz.drawImage(ninjaImD, 32, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
@@ -232,15 +259,15 @@ public class LoopJuego extends AnimationTimer {
             }
 
             //imagen de la puntuacion
-            lapiz.drawImage(heart, 0, 0, 64, 64, 50,5, 20,20);
+            lapiz.drawImage(heart, 0, 0, 64, 64, 50, 5, 20, 20);
             int vidas = 3;
             lapiz.strokeText("= " + vidas, 72, 17);
 
             this.numero++;
-        }else{
+        } else {
             lapiz.strokeText("PAUSA, presiona P para continuar", 100, 50);
         }
-        if (debounceP>0) { //Antirrebote para la tecla P
+        if (debounceP > 0) { //Antirrebote para la tecla P
             debounceP--;
         }
     }
