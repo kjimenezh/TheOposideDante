@@ -22,12 +22,12 @@ public class LoopJuego extends AnimationTimer {
     private Scene escena; //Para controlar los eventos del teclado y para el cambio de nivel.
     private GraphicsContext lapiz;
 
-    private Personaje carro;
+    private Personaje ninja;
     private Image fondo;
     private Image esqueletoim;
     private Enemigosimple esqueleto;
-    private Image mensito2;
-    private Image mensito;
+    private Image ninjaImD;
+    private Image ninjaImI;
     private boolean comprobacion = false;
     private int secuencia = 0;
     private int secuencia2 = 0;
@@ -43,12 +43,12 @@ public class LoopJuego extends AnimationTimer {
     public LoopJuego(Scene escena, GraphicsContext lapiz) {
         this.lapiz = lapiz;
         this.escena = escena;
-        this.carro = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del mensito v;
+        this.ninja = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del ninjaImI v;
         this.esqueleto = new Enemigosimple(750, 478, 45, 57);
         this.heart = new Image("Images/heart.png");
         this.fondo = new Image("Images/CITY_MEGA sin fondo.png");
-        this.mensito2 = new Image("Images/rogue spritesheet calciumtrice.png");
-        this.mensito = new Image("Images/rogue spritesheet calciumtrice IZ.png");
+        this.ninjaImD = new Image("Images/rogue spritesheet calciumtrice.png");
+        this.ninjaImI = new Image("Images/rogue spritesheet calciumtrice IZ.png");
         this.esqueletoim = new Image("Images/rpgcritter update formatted transparent.png");
         pulsacionTeclado = new ArrayList<>();
 
@@ -96,31 +96,33 @@ public class LoopJuego extends AnimationTimer {
                 }
             }
             //shape del personaje
-            Shape sChasis = new Rectangle(carro.getXref() + 5, carro.getYref(), carro.getAncho(), carro.getAlto());
-            Shape ses = new Rectangle(esqueleto.getXref(), esqueleto.getYref(), 30, 42);
+            Shape sNinja = new Rectangle(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho(), ninja.getAlto());
+            Shape sEsqueleto
+                    = new Rectangle(esqueleto.getXref(), esqueleto.getYref(), 30, 42);
 
             //Permite dibujar una imagen de fondo
             //permite hacer que el escenario vaya moviendose en la ubicación 
-            if (carro.getxAbs() < 796) {
-                if (carro.getxAbs() == 794) {
-                    carro.setrefX(760);
+            if (ninja.getxAbs() < 796) {
+                if (ninja.getxAbs() == 794) {
+                    ninja.setrefX(760);
                 }
                 Shape pared = new Rectangle(-20, 400, 2, 150);
                 lapiz.drawImage(fondo, 43, 2400, 696, 320, 0, 0, 796, 520);
                 lapiz.drawImage(fondo, 43, 2068, 696, 268, 0, 89, 796, 438);
                 lapiz.drawImage(fondo, 43, 1621, 696, 235, 0, 204, 796, 330);
-                Shape interseccion = SVGPath.intersect(sChasis, pared);
+                Shape interseccion = SVGPath.intersect(sNinja, pared);
                 if (interseccion.getBoundsInLocal().getWidth() != -1) {
-                    carro.setrefX(-22);
-                    carro.setxAbs(-20);
+                    ninja.setrefX(-22);
+                    ninja.setxAbs(-20);
                 } 
-            } else if (carro.getxAbs() >= 796 && carro.getxAbs() < 1592) {
-                if (carro.getxAbs() == 796) {//796
-                    carro.setrefX(0);//0
+            } else if (ninja.getxAbs() >= 796 && ninja.getxAbs() < 1592) {
+                if (ninja.getxAbs() == 796) {//796
+                    ninja.setrefX(0);//0
                 }
                 Shape pared = new Rectangle(0, 400, 2, 150);
-                Shape interseccion = SVGPath.intersect(sChasis, pared);
-                Shape inter = SVGPath.intersect(sChasis, ses);
+                Shape interseccion = SVGPath.intersect(sNinja, pared);
+                Shape inter = SVGPath.intersect(sNinja, sEsqueleto
+                );
                 lapiz.drawImage(fondo, 736, 2400, 696, 320, 0, 0, 796, 520);
                 lapiz.drawImage(fondo, 736, 2068, 696, 268, 0, 89, 796, 438);
                 lapiz.drawImage(fondo, 736, 1621, 696, 235, 0, 204, 796, 330);
@@ -131,24 +133,40 @@ public class LoopJuego extends AnimationTimer {
                     esqueleto.moverderecha();
                 }
                 if (interseccion.getBoundsInLocal().getWidth() != -1) {
-                    carro.setrefX(2);
+                    ninja.setrefX(2);
                 }
                 if (inter.getBoundsInLocal().getWidth() != -1) {
                     System.out.println("Holi");
                 }
-            } else if (carro.getxAbs() >= 1592 && carro.getxAbs() < 2388) {
-                if (carro.getxAbs() == 1592) {
-                    carro.setrefX(0);
+            } else if (ninja.getxAbs() >= 1592 && ninja.getxAbs() < 2388) {
+                if (ninja.getxAbs() == 1592) {
+                    ninja.setrefX(0);
                 }
+                
                 Shape pared = new Rectangle(-20, 400, 2, 150);
+                Shape interseccion = SVGPath.intersect(sNinja, pared);
+                Shape inter = SVGPath.intersect(sNinja, sEsqueleto
+                );
                 lapiz.drawImage(fondo, 43, 2400, 696, 320, 0, 0, 796, 520);
                 lapiz.drawImage(fondo, 43, 1836, 696, 20, 0, 507, 796, 20);
                 Shape pared2 = new Rectangle(-20, 400, 2, 150);
-                Shape interseccion = SVGPath.intersect(sChasis, pared);
-                Shape interseccion2 = SVGPath.intersect(sChasis, pared2);
+                //Shape interseccion = SVGPath.intersect(sNinja, pared);
+                //Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
+                if (esqueleto.getXref() < 780) {
+                    esqueleto.moverizquierda();
+                    lapiz.drawImage(esqueletoim, 96+16*this.secuencia2, 111, 16, 17, esqueleto.getXref(), esqueleto.getYref(), 26, 27);//animacion esqueleto
+                } else if(esqueleto.getXref() == 0){
+                    esqueleto.moverderecha();
+                }
+                if (interseccion.getBoundsInLocal().getWidth() != -1) {
+                    ninja.setrefX(2);
+                }
+                if (inter.getBoundsInLocal().getWidth() != -1) {
+                    System.out.println("Holi");
+                }
             } 
 
-            //lapiz.strokeRect(carro.getXref() + 5, carro.getYref(), carro.getAncho(), carro.getAlto());
+            //lapiz.strokeRect(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho(), ninja.getAlto());
 
 
             //Obstaculos (imagen)
@@ -156,7 +174,7 @@ public class LoopJuego extends AnimationTimer {
             //lapiz.strokeRect(0, 507, 1800, 20);
 
             //movimiento de "gravedad"
-            carro.moverAbajo();
+            ninja.moverAbajo();
 
             //Validando colision
 
@@ -164,53 +182,53 @@ public class LoopJuego extends AnimationTimer {
             Shape sObstaculo = new Rectangle(100, 100, 20, 20);
             Shape bObstaculo = new Rectangle(0, 503, 1800, 20);
             //Calculando la Interseccion
-            Shape interseccion = SVGPath.intersect(sChasis, bObstaculo);
+            Shape interseccion = SVGPath.intersect(sNinja, bObstaculo);
 
             if (interseccion.getBoundsInLocal().getWidth() != -1) {
-                carro.setrefY(455);
+                ninja.setrefY(455);
             }
 
             //Acciones de teclado
             if (marca == "RIGHT") {
-                lapiz.drawImage(mensito2, 32 * this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
+                lapiz.drawImage(ninjaImD, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
             }
             if (marca == "LEFT") {
-                lapiz.drawImage(mensito, 32 * this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
+                lapiz.drawImage(ninjaImI, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
             }
 
             if (pulsacionTeclado.contains("LEFT")) {
                 //
                 marca = "LEFT";
-                carro.setxAbs(carro.getxAbs() - 2);
-    //            System.out.println(carro.getXref());
-    //            System.out.println("ABS: " + carro.getxAbs());
-                carro.moverIzquierda();
-                lapiz.drawImage(mensito, 32 * this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
+                ninja.setxAbs(ninja.getxAbs() - 2);
+    //            System.out.println(ninja.getXref());
+    //            System.out.println("ABS: " + ninja.getxAbs());
+                ninja.moverIzquierda();
+                lapiz.drawImage(ninjaImI, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
             }
             if (pulsacionTeclado.contains("RIGHT")) {
                 marca = "RIGHT";
-                carro.setxAbs(carro.getxAbs() + 2);
-                //System.out.println(carro.getXref());
-                //System.out.println("ABS: " + carro.getxAbs());
-                carro.moverDerecha();
-                lapiz.drawImage(mensito2, 32 * this.secuencia, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
+                ninja.setxAbs(ninja.getxAbs() + 2);
+                //System.out.println(ninja.getXref());
+                //System.out.println("ABS: " + ninja.getxAbs());
+                ninja.moverDerecha();
+                lapiz.drawImage(ninjaImD, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
             }
-            if ((pulsacionTeclado.contains("UP"))&&(carro.getYref()==455.0)) {
+            if ((pulsacionTeclado.contains("UP"))&&(ninja.getYref()==455.0)) {
                 salto = 20;
 
             }
             if (salto>0) {
-                carro.saltarmoviendose();
+                ninja.saltarmoviendose();
                 if (marca == "RIGHT") {
-                    lapiz.drawImage(mensito2, 32, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
+                    lapiz.drawImage(ninjaImD, 32, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
                 }
                 if (marca == "LEFT") {
-                    lapiz.drawImage(mensito, 32, 64, 32, 32, carro.getXref(), carro.getYref(), 52, 52);
+                    lapiz.drawImage(ninjaImI, 32, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
                 }
                 this.salto--;
             }
             if (pulsacionTeclado.contains("DOWN")) {
-                carro.moverAbajo();
+                ninja.moverAbajo();
             }
 
             //imagen de la puntuacion
