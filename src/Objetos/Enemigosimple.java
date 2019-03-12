@@ -33,7 +33,14 @@ public class Enemigosimple extends Thread{
         return yref;
     }
     
-
+    public void moverderecha(){
+        xref = xref+1;
+    }
+    
+    public void moverizquierda(){
+        xref = xref-1;
+    }
+    
     @Override
     public void run() {
         for (int i = 0; i < 300; i++) {

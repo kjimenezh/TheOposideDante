@@ -45,7 +45,7 @@ public class LoopJuego extends AnimationTimer {
         this.lapiz = lapiz;
         this.escena = escena;
         this.carro = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del mensito v;
-        this.esqueleto = new Enemigosimple(750, 425, 40, 52);
+        this.esqueleto = new Enemigosimple(750, 478, 45, 57);
         this.heart = new Image("Images/heart.png");
         this.fondo = new Image("Images/CITY_MEGA sin fondo.png");
         this.mensito2 = new Image("Images/rogue spritesheet calciumtrice.png");
@@ -120,15 +120,12 @@ public class LoopJuego extends AnimationTimer {
             lapiz.drawImage(fondo, 736, 2400, 696, 320, 0, 0, 796, 520);
             lapiz.drawImage(fondo, 736, 2068, 696, 268, 0, 89, 796, 438);
             lapiz.drawImage(fondo, 736, 1621, 696, 235, 0, 204, 796, 330);
-            if(!comprobacion){
-                try{
-                    esqueleto.start();
-                    comprobacion = true;
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
+            if (esqueleto.getXref() < 780) {
+                esqueleto.moverizquierda();
+                lapiz.drawImage(esqueletoim, 96+16*this.secuencia2, 111, 16, 17, esqueleto.getXref(), esqueleto.getYref(), 26, 27);//animacion esqueleto
+            } else if(esqueleto.getXref() == 0){
+                esqueleto.moverderecha();
             }
-            lapiz.drawImage(esqueletoim, 95+16*this.secuencia2, 111, 16, 17, esqueleto.getXref(), esqueleto.getYref(), 26, 27);//animacion esqueleto
             if (interseccion.getBoundsInLocal().getWidth() != -1) {
                 carro.setrefX(2);
             } 
