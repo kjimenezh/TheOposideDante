@@ -70,7 +70,7 @@ public class LoopJuego extends AnimationTimer {
         this.ninja = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del ninjaImI
         this.esqueleto = new Enemigosimple(720, 478, 45, 57);//ubicacion del esqueleto
         this.minotauro = new Enemigosimple(720, 450, 97, 46);//ubicacion del minotauro
-        
+
         this.heart = new Image("Images/heart.png");
         this.fondo = new Image("Images/CITY_MEGA sin fondo.png");
         this.fondo2 = new Image("Images/Nivel2.png");
@@ -133,7 +133,7 @@ public class LoopJuego extends AnimationTimer {
                     this.secuencia2++;
                 }
             }
-            
+
             if (this.numero % 10 == 0) {
                 if (this.secuencia3 == 3) {
                     this.secuencia3 = 0;
@@ -141,11 +141,11 @@ public class LoopJuego extends AnimationTimer {
                     this.secuencia3++;
                 }
             }
-            
+
             //shape del personaje
             Shape sNinja = new Rectangle(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho() - 5, ninja.getAlto());
             Shape sEsqueleto = new Rectangle(esqueleto.getXref(), esqueleto.getYref(), 23, 38);
-            Shape sMinotauro = new Rectangle(minotauro.getXref()+30,minotauro.getYref()+7, 25, 35);
+            Shape sMinotauro = new Rectangle(minotauro.getXref() + 30, minotauro.getYref() + 7, 25, 35);
 
             //Permite dibujar una imagen de fondo
             //permite hacer que el escenario vaya moviendose en la ubicación 
@@ -163,8 +163,6 @@ public class LoopJuego extends AnimationTimer {
                 Shape interseccion = SVGPath.intersect(sNinja, pared);
                 Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
                 if (interseccion.getBoundsInLocal().getWidth() != -1) {
-                    System.out.println("esta en colicion");
-                    System.out.println(interseccion.getBoundsInLocal().getWidth());
                     ninja.setrefX(-22);
                     ninja.setxAbs(-20);
                 }
@@ -173,9 +171,6 @@ public class LoopJuego extends AnimationTimer {
                     if (interseccion2.getBoundsInLocal().getWidth() != -1) {
                         ninja.setrefX(764);
                         ninja.setxAbs(762);
-                        System.out.println("esta en colision");
-                        System.out.println(interseccion2.getBoundsInLocal().getWidth());
-
                     }
                 }
                 //*******************Escena 2**************************
@@ -196,8 +191,6 @@ public class LoopJuego extends AnimationTimer {
 
                 //paredes escenario 2
                 if (interseccion.getBoundsInLocal().getWidth() != -1) {
-                    System.out.println("esta en colicion");
-                    System.out.println(interseccion.getBoundsInLocal().getWidth());
                     ninja.setrefX(2);
                     ninja.setxAbs(798);
                 }
@@ -205,9 +198,7 @@ public class LoopJuego extends AnimationTimer {
 
                     if (interseccion2.getBoundsInLocal().getWidth() != -1) {
                         ninja.setrefX(764);
-                        System.out.println("abs" + ninja.getxAbs());
                         ninja.setxAbs(1562);
-                        System.out.println("esta en colision");
                         System.out.println(interseccion2.getBoundsInLocal().getWidth());
 
                     }
@@ -252,30 +243,27 @@ public class LoopJuego extends AnimationTimer {
 
                 lapiz.drawImage(fondo3, 0, 0, 492, 233, 0, 0, 796, 520);
 
-if (!comprobacion2) {
+                if (!comprobacion2) {
                     minotauro.moverizquierda();
-                    lapiz.drawImage(minota2, 92 + 97* this.secuencia3, 124, 97, 46, minotauro.getXref(), minotauro.getYref(), 107, 52);//animacion esqueleto
+                    lapiz.drawImage(minota2, 92 + 97 * this.secuencia3, 124, 97, 46, minotauro.getXref(), minotauro.getYref(), 107, 52);//animacion esqueleto
                     if (interse.getBoundsInLocal().getWidth() != -1) {
                         comprobacion2 = true;
                     }
                 } else {
                     minotauro.moverderecha();
-                    lapiz.drawImage(minota1, 97* this.secuencia3, 124, 97, 46, minotauro.getXref(), minotauro.getYref(), 107, 52);
+                    lapiz.drawImage(minota1, 97 * this.secuencia3, 124, 97, 46, minotauro.getXref(), minotauro.getYref(), 107, 52);
                     if (interse2.getBoundsInLocal().getWidth() != -1) {
                         comprobacion2 = false;
                     }
                 }
-                
+
                 if (intersecmin.getBoundsInLocal().getWidth() != -1 && tiempovida == 0) {
                     System.out.println("Se ha chocado con el minotauro");
                     vidas--;
                     tiempovida = 50;
-                }                
+                }
 // paredes escenario 3
                 if (interseccion.getBoundsInLocal().getWidth() != -1) {
-                    System.out.println("esta en colicion");
-                    System.out.println(ninja.getxAbs());
-                    System.out.println(interseccion.getBoundsInLocal().getWidth());
                     ninja.setrefX(2);
                     ninja.setxAbs(1598);
                 }
@@ -283,11 +271,7 @@ if (!comprobacion2) {
 
                     if (interseccion2.getBoundsInLocal().getWidth() != -1) {
                         ninja.setrefX(764);
-                        System.out.println(ninja.getxAbs());
-                        System.out.println("esta en colision");
                         ninja.setxAbs(2360);
-                        System.out.println(interseccion2.getBoundsInLocal().getWidth());
-                        System.out.println(ninja.getxAbs());
                     }
                 }
             }
@@ -412,7 +396,6 @@ if (!comprobacion2) {
             debounceP--;
 
         }
-        
 
     }
 }
