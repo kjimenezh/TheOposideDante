@@ -59,9 +59,7 @@ public class VentanafinalController {
             }
             
             Usuario user = new Usuario(nombreUser);
-            boolean erg = modelo.getUsers().add(user);
-          
-            if(erg){
+            if(modelo.addUser(user)){
                 view.getMensaje().setText("Información agregada :)");
             }else{
                 view.getMensaje().setText("Ya existe la información");

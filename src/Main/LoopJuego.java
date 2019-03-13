@@ -102,12 +102,8 @@ public class LoopJuego extends AnimationTimer {
             debounceP = 15;
         }
         if (vidas < 0) {
-            MenuController controller = new MenuController(model);
-            try {
-                controller.mostrarVista();
-            } catch (IOException ex) {
-                Logger.getLogger(LoopJuego.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            VentanafinalController controlador = new VentanafinalController(model);
+            controlador.mostrarVista();
             vidas = 3;
         } else if (!pausa) {
             lapiz.clearRect(0, 0, 1800, 520);
