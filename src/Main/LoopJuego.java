@@ -33,15 +33,20 @@ public class LoopJuego extends AnimationTimer {
     private Image fondo3;
     private Image esqueletoim;
     private Enemigosimple esqueleto;
+    private Enemigosimple minotauro;
     private Image ninjaImD;
     private Image ninjaImDN;
     private Image ninjaImI;
     private Image ninjaImIN;
     private Image ghost1;
     private Image ghost2;
+    private Image minota1;
+    private Image minota2;
     private boolean comprobacion = false;
+    private boolean comprobacion2 = false;
     private int secuencia = 0;
     private int secuencia2 = 0;
+    private int secuencia3 = 0;
     private int numero;
     private int tiempovida = 0;
     private int vidas = 3;
@@ -61,8 +66,9 @@ public class LoopJuego extends AnimationTimer {
 
         this.lapiz = lapiz;
         this.escena = escena;
-        this.ninja = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del ninjaImI v;
-        this.esqueleto = new Enemigosimple(720, 478, 45, 57);
+        this.ninja = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del ninjaImI
+        this.esqueleto = new Enemigosimple(720, 478, 45, 57);//ubicacion del esqueleto
+        this.minotauro = new Enemigosimple(720, 450, 97, 46);
         this.heart = new Image("Images/heart.png");
         this.fondo = new Image("Images/CITY_MEGA sin fondo.png");
         this.fondo2 = new Image("Images/Nivel2.png");
@@ -72,6 +78,8 @@ public class LoopJuego extends AnimationTimer {
         this.ninjaImI = new Image("Images/rogue spritesheet calciumtrice IZ.png");
         this.ninjaImIN = new Image("Images/rogue spritesheet calciumtrice IZnegativo.png");
         this.esqueletoim = new Image("Images/rpgcritter update formatted transparent.png");
+        this.minota1 = new Image("Images/minotaurus_spritesheet_lava.png");
+        this.minota2 = new Image("Images/minotaurus_spritesheet_lava IZQUIERDA sinfondo.png");
         this.ghost1 = new Image("Images/ghostDer.png");
         this.ghost2 = new Image("Images/ghostIzq.png");
         pulsacionTeclado = new ArrayList<>();
@@ -123,9 +131,19 @@ public class LoopJuego extends AnimationTimer {
                     this.secuencia2++;
                 }
             }
+            
+            if (this.numero % 10 == 0) {
+                if (this.secuencia3 == 3) {
+                    this.secuencia3 = 0;
+                } else {
+                    this.secuencia3++;
+                }
+            }
+            
             //shape del personaje
             Shape sNinja = new Rectangle(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho() - 5, ninja.getAlto());
             Shape sEsqueleto = new Rectangle(esqueleto.getXref(), esqueleto.getYref(), 23, 38);
+            Shape sMinotauro = new Rectangle(minotauro.getXref()+30,minotauro.getYref()+7, 25, 35);
 
             //Permite dibujar una imagen de fondo
             //permite hacer que el escenario vaya moviendose en la ubicación 
@@ -156,7 +174,7 @@ public class LoopJuego extends AnimationTimer {
                      System.out.println(interseccion2.getBoundsInLocal().getWidth());
                     
                }*/
-//////////////////////////////////////////////////Escena 2/////////////////////////////////////7
+//////////////////////////////////////////////////Escena 2/////////////////////////////////////
             } else if (ninja.getxAbs() >= 796 && ninja.getxAbs() < 1592) {
                 if (ninja.getxAbs() == 796) {//796
                     ninja.setrefX(0);//0
@@ -222,8 +240,31 @@ public class LoopJuego extends AnimationTimer {
 
                 Shape interseccion = SVGPath.intersect(sNinja, pared);
                 Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
+                Shape interse = SVGPath.intersect(sMinotauro, pared);
+                Shape interse2 = SVGPath.intersect(sMinotauro, pared2);
+                Shape intersecmin = SVGPath.intersect(sNinja, sMinotauro);
 
                 lapiz.drawImage(fondo3, 0, 0, 492, 233, 0, 0, 796, 520);
+                
+                if (!comprobacion2) {
+                    minotauro.moverizquierda();
+                    lapiz.drawImage(minota2, 92 + 97* this.secuencia3, 124, 97, 46, minotauro.getXref(), minotauro.getYref(), 107, 52);//animacion esqueleto
+                    if (interse.getBoundsInLocal().getWidth() != -1) {
+                        comprobacion2 = true;
+                    }
+                } else {
+                    minotauro.moverderecha();
+                    lapiz.drawImage(minota1, 97* this.secuencia3, 124, 97, 46, minotauro.getXref(), minotauro.getYref(), 107, 52);
+                    if (interse2.getBoundsInLocal().getWidth() != -1) {
+                        comprobacion2 = false;
+                    }
+                }
+                
+                if (intersecmin.getBoundsInLocal().getWidth() != -1 && tiempovida == 0) {
+                    System.out.println("Se ha chocado con el minotauro");
+                    vidas--;
+                    tiempovida = 50;
+                }
 
                 //Activar paredes escenario 3
                 /*if (interseccion.getBoundsInLocal().getWidth() != -1) {
@@ -296,6 +337,7 @@ public class LoopJuego extends AnimationTimer {
                     lapiz.drawImage(ghost1, 32*this.secuenciaGhost2,32,32,32,ghostX,20,52,52);
                 }
             }
+            
             /////////////////////////////////////////Acciones de teclado////////
             if (marca == "RIGHT") {
                 lapiz.drawImage(ninjaImD, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
@@ -304,7 +346,6 @@ public class LoopJuego extends AnimationTimer {
             }
 
             if (pulsacionTeclado.contains("LEFT")) {
-                //
                 marca = "LEFT";
                 ninja.setxAbs(ninja.getxAbs() - 2);
                 ninja.moverIzquierda();
@@ -353,7 +394,7 @@ public class LoopJuego extends AnimationTimer {
                 }
             }
             
-            //imagen de la puntuacion
+            //imagen de la salud actual
             lapiz.drawImage(heart, 0, 0, 64, 64, 50, 5, 20, 20);
             lapiz.strokeText("= " + vidas, 72, 17);
 
