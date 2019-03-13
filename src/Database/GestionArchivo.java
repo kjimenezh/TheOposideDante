@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import modelo.Usuario;
 
@@ -22,33 +24,30 @@ public class GestionArchivo {
     }
     
     //El formato de guardado por linea es: Nombreusuario,score,
-    public boolean saveUsers(ArrayList<Usuario> usuarios)throws FileNotFoundException, IOException{
-        BufferedWriter salida = null;
-        
-        FileWriter fw = null;
-
+    public boolean saveUsers(Map<String,String> usuarios)throws FileNotFoundException, IOException{
         File file = new File(this.ruta);
+
         if (!file.exists()) {
             file.createNewFile();
         }
             
         //El true permite seguir escribiendo en el archivo sin que s sobreescriba lo ya existente
-        fw = new FileWriter(file.getAbsoluteFile(), true);
-        salida = new BufferedWriter(fw);
+        PrintStream salida = new PrintStream(file);
         
-        for(Usuario usuario : usuarios){
-            salida.write(usuario.getNombre());
-            salida.write(",");
-            salida.write(String.valueOf(usuario.getScore()));
-            salida.write(",\n");
+        for(String key : usuarios.keySet()){
+            salida.print(key);
+            salida.print(",");
+            salida.print(usuarios.get(key));
+            salida.print(",");
         }
         salida.flush();
         salida.close();
         return true;
     }
     
-    public ArrayList<Usuario> loadUsers(){
-        ArrayList<Usuario> users = new ArrayList<Usuario>();
+    
+    public Map<String,String> loadUsers(){
+        Map<String,String> users = new HashMap<String,String>();
         Scanner sc;
         
         try {
@@ -56,10 +55,8 @@ public class GestionArchivo {
             sc.useDelimiter(",");
             while (sc.hasNext()) {
 		String name = sc.next().trim();
-                double score = Double.parseDouble(sc.next().trim());
-                Usuario user = new Usuario(name);
-                user.setScore(score);
-                users.add(user);
+                String score = sc.next().trim();
+                users.put(name, score);
             }
 	}catch (FileNotFoundException e) {
             System.out.println("File not found -- " + this.ruta);
