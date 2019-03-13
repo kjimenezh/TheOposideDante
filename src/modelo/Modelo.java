@@ -5,33 +5,25 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+import javafx.stage.Stage;
+
 /**
  *
  * @author gasilva
  */
 public class Modelo {
-    private String x;
-    private String y;
-
+    private ArrayList<Usuario> users;
     
-
-    public String getX() {
-        return x;
-    }
-
-    public void setX(String x) {
-        this.x = x;
-    }
-
-    public String getY() {
-        return y;
-    }
-
-    public void setY(String y) {
-        this.y = y;
-    }
-
     public Modelo() {
+        this.users = new ArrayList<>();
     }
     
+    public boolean addUser(Usuario user){
+        return this.users.add(user);
+    }
+    
+    public ArrayList<Usuario> getUsers() {
+        return users;
+    }
 }

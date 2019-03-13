@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import modelo.Usuario;
 
+
 /**
  * @author kjime
  */
@@ -56,7 +57,8 @@ public class GestionArchivo {
             while (sc.hasNext()) {
 		String name = sc.next().trim();
                 double score = Double.parseDouble(sc.next().trim());
-                Usuario user = new Usuario(name,score);
+                Usuario user = new Usuario(name);
+                user.setScore(score);
                 users.add(user);
             }
 	}catch (FileNotFoundException e) {

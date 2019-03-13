@@ -28,6 +28,7 @@ public class MenuController{
         Singleton singleton = Singleton.getSingleton();
         mostrar(singleton.getStage());
     }
+    
     public void mostrar(Stage stage) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("FXMLMenu.fxml"));
         Scene scene = new Scene(root);
@@ -36,8 +37,14 @@ public class MenuController{
         stage.setScene(scene);
         stage.show();
     }
+    
     public void MenuButton() throws IOException{
         LoopJuegoController controlador = new LoopJuegoController(modelo);
         controlador.mostrarVista();
     }
+    
+    public void PuntajeButton() throws IOException{
+            PuntajeController controladorpuntaje= new PuntajeController(modelo);
+            controladorpuntaje.mostrarVista();
+        }
 }

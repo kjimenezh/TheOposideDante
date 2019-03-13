@@ -27,8 +27,11 @@ public class FXMLMenuController implements Initializable {
         controller.MenuButton();
     }
     @FXML
-    private void PuntajeButtonAction(ActionEvent event){//Cuando Puntaje es oprimido
+    private void PuntajeButtonAction(ActionEvent event) throws IOException{//Cuando Puntaje es oprimido
         System.out.println("Puntaje");
+        Modelo modelo = new Modelo();
+        MenuController controller = new MenuController(modelo);
+        controller.PuntajeButton();
     }
     
     @Override
