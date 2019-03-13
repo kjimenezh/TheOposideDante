@@ -35,6 +35,8 @@ public class LoopJuego extends AnimationTimer {
     private Enemigosimple esqueleto;
     private Enemigosimple minotauro;
     private Enemigosimple hongo;
+    private Enemigosimple cepam;
+    private Image cepamala;
     private Image ninjaImD;
     private Image ninjaImDN;
     private Image ninjaImI;
@@ -74,6 +76,7 @@ public class LoopJuego extends AnimationTimer {
         this.esqueleto = new Enemigosimple(720, 478, 45, 57);//ubicacion del esqueleto
         this.minotauro = new Enemigosimple(720, 450, 97, 46);//ubicacion del minotauro
         this.hongo = new Enemigosimple(720, 478, 16, 16);//ubicacion del hongo
+        this.cepam = new Enemigosimple(150, 491, 20 ,20 );
         this.heart = new Image("Images/heart.png");
         this.fondo = new Image("Images/CITY_MEGA sin fondo.png");
         this.fondo2 = new Image("Images/Nivel2.png");
@@ -83,6 +86,7 @@ public class LoopJuego extends AnimationTimer {
         this.ninjaImI = new Image("Images/rogue spritesheet calciumtrice IZ.png");
         this.ninjaImIN = new Image("Images/rogue spritesheet calciumtrice IZnegativo.png");
         this.esqueletoim = new Image("Images/rpgcritter update formatted transparent.png");
+        this.cepamala = new Image("Images/rpgcritter update formatted transparent.png");
         this.hongoim = new Image("Images/rpgcritter update formatted transparent.png");
         this.minota1 = new Image("Images/minotaurus_spritesheet_lava.png");
         this.minota2 = new Image("Images/minotaurus_spritesheet_lava IZQUIERDA sinfondo.png");
@@ -118,6 +122,8 @@ public class LoopJuego extends AnimationTimer {
         if (vidas < 0) {
             VentanafinalController controlador = new VentanafinalController(model);
             controlador.mostrarVista();
+            String score = String.valueOf(puntaje);
+            controlador.setScore(score);
             vidas = 3;
         } else if (!pausa) {
             lapiz.clearRect(0, 0, 1800, 520);
@@ -173,6 +179,8 @@ public class LoopJuego extends AnimationTimer {
                     ninja.setrefX(-22);
                     ninja.setxAbs(-20);
                 }
+                
+                lapiz.drawImage(cepamala, 128 + 16*secuencia2 ,130, 16, 16, 150, cepam.getYref(), 20 ,20);
                 
                 if (!comprobacion3) {
                     hongo.moverizquierda();
