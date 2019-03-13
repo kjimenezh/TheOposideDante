@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Modelo;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javazoom.jlgui.basicplayer.BasicPlayer;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 /**
  *
@@ -120,6 +124,7 @@ public class LoopJuego extends AnimationTimer {
 
     @Override
     public void handle(long now) {
+        
         if (pulsacionTeclado.contains("P") && debounceP == 0) { //oprimir P para pausar
             pausa = !pausa;
             debounceP = 15;
@@ -158,7 +163,7 @@ public class LoopJuego extends AnimationTimer {
             }
 
             //shape del personaje
-            Shape sNinja = new Rectangle(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho() - 5, ninja.getAlto());
+            Shape sNinja = new Rectangle(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho() - 10, ninja.getAlto());
             Shape sEsqueleto = new Rectangle(esqueleto.getXref(), esqueleto.getYref(), 23, 38);
             Shape sMinotauro = new Rectangle(minotauro.getXref() + 25, minotauro.getYref() + 10, 28, 35);
             Shape sHongo = new Rectangle(hongo.getXref(), hongo.getYref(), 25, 25);

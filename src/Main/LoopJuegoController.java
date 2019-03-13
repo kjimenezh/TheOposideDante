@@ -7,12 +7,16 @@ package Main;
 
 import modelo.Modelo;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javazoom.jlgui.basicplayer.BasicPlayer;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 /**
  *
@@ -29,6 +33,17 @@ public class LoopJuegoController {
         mostrar(singleton.getStage());
     }
     public void mostrar(Stage stage) throws IOException{
+        String songName = "running.mp3";
+        String pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+        BasicPlayer player = new BasicPlayer();
+        try {
+            player.open(new URL("file:///" + pathToMp3));
+            for (int i = 0; i < 3; i++) {
+                player.play();
+            }
+        } catch (BasicPlayerException | MalformedURLException e) {
+            e.printStackTrace();
+        }
         Pane layout  = new Pane();  
         Canvas canvas = new Canvas(810,520);
         layout.getChildren().add(canvas);
