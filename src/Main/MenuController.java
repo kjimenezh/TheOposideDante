@@ -5,7 +5,6 @@
  */
 package Main;
 
-import modelo.Modelo;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

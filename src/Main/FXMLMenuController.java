@@ -5,7 +5,6 @@
  */
 package Main;
 
-import modelo.Modelo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +17,11 @@ import javafx.fxml.Initializable;
  * @author ansil
  */
 public class FXMLMenuController implements Initializable {
+    /*private Modelo modelo;
+    
+    public FXMLMenuController(Modelo modelo){
+        this.modelo = modelo;
+    }*/
     
     @FXML
     private void InicioButtonAction(ActionEvent event) throws IOException { //Cuando Inicio es oprimido

@@ -1,5 +1,6 @@
 package Main;
 
+import Database.GestionArchivo;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -15,7 +16,6 @@ import Objetos.Enemigosimple;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.Modelo;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javazoom.jlgui.basicplayer.BasicPlayer;
@@ -81,6 +81,7 @@ public class LoopJuego extends AnimationTimer {
 
         this.lapiz = lapiz;
         this.escena = escena;
+        this.model = modelo;
         this.ninja = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del ninjaImI
         this.esqueleto = new Enemigosimple(720, 478, 45, 57);//ubicacion del esqueleto
         this.minotauro = new Enemigosimple(720, 450, 97, 46);//ubicacion del minotauro
@@ -129,16 +130,17 @@ public class LoopJuego extends AnimationTimer {
 
     @Override
     public void handle(long now) {
-        
         if (pulsacionTeclado.contains("P") && debounceP == 0) { //oprimir P para pausar
             pausa = !pausa;
             debounceP = 15;
         }
         if (vidas < 0) {
+            stop();
             VentanafinalController controlador = new VentanafinalController(model);
             controlador.mostrarVista();
             String score = String.valueOf(puntaje);
             controlador.setScore(score);
+            puntaje = 0;
             vidas = 5;
         } else if (!pausa) {
             lapiz.clearRect(0, 0, 1800, 520);

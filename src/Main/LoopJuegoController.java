@@ -5,7 +5,7 @@
  */
 package Main;
 
-import modelo.Modelo;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -50,7 +50,7 @@ public class LoopJuegoController {
         Scene escena = new Scene(layout,796,520);
         
         GraphicsContext lapiz = canvas.getGraphicsContext2D();
-        LoopJuego juego = new LoopJuego(escena, lapiz, this.modelo);
+        LoopJuego juego = new LoopJuego(escena, lapiz, modelo);
         juego.start();
         stage.setScene(escena);
         stage.setTitle("The Oposide Dante");

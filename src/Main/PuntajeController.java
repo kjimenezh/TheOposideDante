@@ -6,8 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import modelo.Modelo;
-import modelo.Usuario;
 
 /**
  *
@@ -43,12 +41,8 @@ public class PuntajeController {
         @Override
         public void handle(ActionEvent e) {   
             // Regresar 
-            MenuController controladormenu = new MenuController(modelo);
-            try {   
-                controladormenu.mostrarVista();
-            } catch (IOException ex) {
-                Logger.getLogger(PuntajeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            VentanamenuController controladormenu = new VentanamenuController(modelo);
+            controladormenu.mostrarVista();
         }   
     }
    

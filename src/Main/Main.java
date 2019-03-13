@@ -1,7 +1,8 @@
 package Main;
 
-import modelo.Modelo;
+import Database.GestionArchivo;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -14,11 +15,14 @@ public class Main extends Application{
         //registrar la variable en el singleton
         Singleton singleton = Singleton.getSingleton();
         singleton.setStage(primaryStage);
+        
+        GestionArchivo archivo = new GestionArchivo("datos.txt");
         //modeloen memoria
         Modelo modelo = new Modelo();
+        modelo.setUsers(archivo.loadUsers());
         //invocar el controlador de la vista que quiero visualizar
-        MenuController ventanaMenu = new MenuController(modelo);
-        ventanaMenu.mostrarVista();
+        VentanamenuController controladormenu = new VentanamenuController(modelo);
+        controladormenu.mostrarVista();
         System.out.println("ver");
     }
     

@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -26,6 +28,7 @@ public class Ventanafinal {
     private Text mensaje;
     private Button registrar;
     private Button regresar;
+    private Image image;
     
     public Ventanafinal(){
         border = new BorderPane();
@@ -35,6 +38,14 @@ public class Ventanafinal {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
+        
+        image = new Image("Images/Nivel3.png");
+        ImageView imageV = new ImageView();
+        imageV.setImage(image);
+        imageV.setFitHeight(520);
+        imageV.setFitWidth(810);
+        border.getChildren().add(imageV);
+      
         
         nombreUser = new Label("Nombre SuperUsuario: ");
         nombreUserT = new TextField();
@@ -53,7 +64,7 @@ public class Ventanafinal {
         
         border.setCenter(grid);
         
-        scene = new Scene(border,300,300);
+        scene = new Scene(border,810,520);
                 
     }
     
