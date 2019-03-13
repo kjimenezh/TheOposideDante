@@ -101,7 +101,7 @@ public class LoopJuego extends AnimationTimer {
             pausa = !pausa;
             debounceP = 15;
         }
-        if (vidas < -1) {
+        if (vidas < 0) {
             MenuController controller = new MenuController(model);
             try {
                 controller.mostrarVista();
@@ -160,7 +160,7 @@ public class LoopJuego extends AnimationTimer {
                      System.out.println(interseccion2.getBoundsInLocal().getWidth());
                     
                }*/
-/////////////////////////////////////////////////////////////////Escena 2/////////////////////////////////////7
+//////////////////////////////////////////////////Escena 2/////////////////////////////////////7
             } else if (ninja.getxAbs() >= 796 && ninja.getxAbs() < 1592) {
                 if (ninja.getxAbs() == 796) {//796
                     ninja.setrefX(0);//0
@@ -215,7 +215,7 @@ public class LoopJuego extends AnimationTimer {
                     vidas--;
                     tiempovida = 50;
                 }
-/////////////////////////////////////////////////////////////Escena 3/////////////////////////////////////////////////////
+                //////////////////////////////////Escena 3//////////////////////
             } else if (ninja.getxAbs() >= 1592 && ninja.getxAbs() < 2388) {
                 if (ninja.getxAbs() == 1592) {
                     ninja.setrefX(0);
@@ -266,7 +266,7 @@ public class LoopJuego extends AnimationTimer {
             }
             
             
-            ///////////////////////Ghost/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////Ghost////////////////////////////////////////
             
             if (this.numero % 10 ==0) {
                 
@@ -300,10 +300,7 @@ public class LoopJuego extends AnimationTimer {
                     lapiz.drawImage(ghost1, 32*this.secuenciaGhost2,32,32,32,ghostX,20,52,52);
                 }
             }
-            ////////////////////////////////////////////////////////////////////////////////////////
-            
-            
-            //Acciones de teclado
+            /////////////////////////////////////////Acciones de teclado////////
             if (marca == "RIGHT") {
                 lapiz.drawImage(ninjaImD, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
             } else if (marca == "LEFT") {
@@ -314,15 +311,11 @@ public class LoopJuego extends AnimationTimer {
                 //
                 marca = "LEFT";
                 ninja.setxAbs(ninja.getxAbs() - 2);
-                //            System.out.println(ninja.getXref());
-                //            System.out.println("ABS: " + ninja.getxAbs());
                 ninja.moverIzquierda();
                 lapiz.drawImage(ninjaImI, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
             } else if (pulsacionTeclado.contains("RIGHT")) {
                 marca = "RIGHT";
                 ninja.setxAbs(ninja.getxAbs() + 2);
-                //System.out.println(ninja.getXref());
-                //System.out.println("ABS: " + ninja.getxAbs());
                 ninja.moverDerecha();
                 lapiz.drawImage(ninjaImD, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
             } else if (pulsacionTeclado.contains("DOWN")) {
@@ -342,17 +335,9 @@ public class LoopJuego extends AnimationTimer {
                 salto = 20;
             }
 
-            //imagen de la puntuacion
-            lapiz.drawImage(heart, 0, 0, 64, 64, 50, 5, 20, 20);
-            lapiz.strokeText("= " + vidas, 72, 17);
-
-            this.numero++;
-            /*if (vidas==0) {
-                lapiz.drawImage(ninjaImD, 32 * this.secuencia, 129, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
-            }*/
             if (tiempovida > 0) {
                 tiempovida--;
-                //Animaciones en negativo    
+            ///////////////Animaciones en negativo//////////////////////////////    
                 if (marca == "RIGHT") {
                     lapiz.drawImage(ninjaImDN, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
                 }else if (marca == "LEFT") {
@@ -371,6 +356,12 @@ public class LoopJuego extends AnimationTimer {
                     salto = 20;
                 }
             }
+            
+            //imagen de la puntuacion
+            lapiz.drawImage(heart, 0, 0, 64, 64, 50, 5, 20, 20);
+            lapiz.strokeText("= " + vidas, 72, 17);
+
+            this.numero++;
         } else {
             lapiz.strokeText("PAUSA, presiona P para continuar", 100, 50);
         }
