@@ -68,6 +68,8 @@ public class LoopJuego extends AnimationTimer {
     private int secuenciaGhost2 = 0;
     private boolean ghostP = false;
     private int puntaje = 0;
+    private ArrayList<Enemigosimple> bombas;
+    private ArrayList<Shape> sBombas;
 
     public LoopJuego(Scene escena, GraphicsContext lapiz, Modelo modelo) {
 
@@ -94,6 +96,8 @@ public class LoopJuego extends AnimationTimer {
         this.ghost1 = new Image("Images/ghostDer.png");
         this.ghost2 = new Image("Images/ghostIzq.png");
         pulsacionTeclado = new ArrayList<>();
+        this.bombas = new ArrayList<>();
+        this.sBombas = new ArrayList<>();
 
         escena.setOnKeyPressed(
                 new EventHandler<KeyEvent>() {
@@ -409,21 +413,6 @@ public class LoopJuego extends AnimationTimer {
             }
 
             //*************************Ghost******************************
-            if (this.numero % 10 == 0) {
-
-                if (this.secuenciaGhost == 3) {
-                    this.secuenciaGhost = 0;
-                } else {
-                    this.secuenciaGhost++;
-                }
-
-                if (this.secuenciaGhost2 == 5) {
-                    this.secuenciaGhost2 = 0;
-                } else {
-                    this.secuenciaGhost2++;
-                }
-
-            }
             if (ghostX < ninja.getXref()) {
                 lapiz.drawImage(ghost1, 32 * this.secuenciaGhost, 64, 32, 32, ghostX, 20, 52, 52);
                 ghostX++;
@@ -436,9 +425,31 @@ public class LoopJuego extends AnimationTimer {
             }
             if (ghostX == ninja.getXref()) {
                 if (ghostP) {
-                    lapiz.drawImage(ghost2, 32 * (this.secuenciaGhost2 + 3), 32, 32, 32, ghostX, 20, 52, 52);
-                } else {
-                    lapiz.drawImage(ghost1, 32 * this.secuenciaGhost2, 32, 32, 32, ghostX, 20, 52, 52);
+                    lapiz.drawImage(ghost2, 32 * (this.secuenciaGhost + 5), 64, 32, 32, ghostX, 20, 52, 52);
+                }else{
+                    lapiz.drawImage(ghost1, 32 * this.secuenciaGhost, 64, 32, 32, ghostX, 20, 52, 52);
+                }
+            }
+            if (this.numero % 200 == 0) {
+                Enemigosimple bomba = new Enemigosimple(ghostX, 20, 26, 27);
+                this.bombas.add(bomba);
+                Shape sBomba = new Rectangle(ghostX,20,26,27);
+                this.sBombas.add(sBomba);
+            }
+            for (int i = 0; i < this.bombas.size(); i++) {
+                this.bombas.get(i).setYref(this.bombas.get(i).getYref()+1);
+                Shape sBomba = new Rectangle(this.bombas.get(i).getXref(),this.bombas.get(i).getYref(),26,27);
+                this.sBombas.set(i, sBomba);
+                Shape interEsquelet = SVGPath.intersect(sNinja, this.sBombas.get(i));
+                lapiz.drawImage(esqueletoim, 96 + 16 * this.secuencia2, 79, 16, 17, this.bombas.get(i).getXref(), this.bombas.get(i).getYref(), 26, 27);
+                if ((interEsquelet.getBoundsInLocal().getWidth() != -1)&&(tiempovida==0)) {
+                    System.out.println("lo toco un esqueleto del cielo");
+                    //vidas--;
+                    tiempovida = 50;
+                }
+                if (this.bombas.get(i).getYref()>600) {
+                    this.bombas.remove(i);
+                    this.sBombas.remove(i);
                 }
             }
             //******************************Acciones de teclado***********************************
