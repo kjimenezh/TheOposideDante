@@ -52,7 +52,7 @@ public class LoopJuego extends AnimationTimer {
     private int debounceP = 0; //Antirrebote para la pausa
 
     public LoopJuego(Scene escena, GraphicsContext lapiz, Modelo modelo) {
-        
+
         this.lapiz = lapiz;
         this.escena = escena;
         this.ninja = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del ninjaImI v;
@@ -93,18 +93,16 @@ public class LoopJuego extends AnimationTimer {
             pausa = !pausa;
             debounceP = 15;
         }
-        if(vidas<0){
+        if (vidas < -1) {
             MenuController controller = new MenuController(model);
             try {
                 controller.mostrarVista();
             } catch (IOException ex) {
                 Logger.getLogger(LoopJuego.class.getName()).log(Level.SEVERE, null, ex);
             }
-            vidas=3;
-        }
-        else if (!pausa) {
+            vidas = 3;
+        } else if (!pausa) {
             lapiz.clearRect(0, 0, 1800, 520);
-            
 
             if (this.numero % 10 == 0) {
                 if (this.secuencia == 9) {
@@ -127,6 +125,7 @@ public class LoopJuego extends AnimationTimer {
 
             //Permite dibujar una imagen de fondo
             //permite hacer que el escenario vaya moviendose en la ubicación 
+//////////////////////////////////////////////////////ESCENA 1///////////////////
             if (ninja.getxAbs() < 796) {
                 if (ninja.getxAbs() == 794) {
                     ninja.setrefX(760);
@@ -146,13 +145,14 @@ public class LoopJuego extends AnimationTimer {
                     ninja.setxAbs(-20);
                 }
                 //Activar pared2 escenario º
-                 if (interseccion2.getBoundsInLocal().getWidth() !=-1) {
+                /*if (interseccion2.getBoundsInLocal().getWidth() !=-1) {
                     ninja.setrefX(760);
                     ninja.setxAbs(758);
                      System.out.println("esta en colision");
                      System.out.println(interseccion2.getBoundsInLocal().getWidth());
                     
-               }
+               }*/
+/////////////////////////////////////////////////////////////////Escena 2/////////////////////////////////////7
             } else if (ninja.getxAbs() >= 796 && ninja.getxAbs() < 1592) {
                 if (ninja.getxAbs() == 796) {//796
                     ninja.setrefX(0);//0
@@ -169,8 +169,8 @@ public class LoopJuego extends AnimationTimer {
 
                 Shape inter = SVGPath.intersect(sNinja, sEsqueleto);
 
-                lapiz.drawImage(fondo2, 0,0, 769, 286, 0, 0, 796, 520);
-                
+                lapiz.drawImage(fondo2, 0, 0, 769, 286, 0, 0, 796, 520);
+
                 //Activar paredes escenario 2
                 /*if (interseccion.getBoundsInLocal().getWidth() != -1) {
                     System.out.println("esta en colicion");
@@ -206,7 +206,7 @@ public class LoopJuego extends AnimationTimer {
                     vidas--;
                     tiempovida = 50;
                 }
-
+/////////////////////////////////////////////////////////////Escena 3/////////////////////////////////////////////////////
             } else if (ninja.getxAbs() >= 1592 && ninja.getxAbs() < 2388) {
                 if (ninja.getxAbs() == 1592) {
                     ninja.setrefX(0);
@@ -214,12 +214,12 @@ public class LoopJuego extends AnimationTimer {
 
                 Shape pared = new Rectangle(3, 400, 2, 150);
                 Shape pared2 = new Rectangle(804, 400, 2, 150);
-                
+
                 Shape interseccion = SVGPath.intersect(sNinja, pared);
                 Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
-                
+
                 lapiz.drawImage(fondo3, 0, 0, 492, 233, 0, 0, 796, 520);
-                
+
                 //Activar paredes escenario 3
                 /*if (interseccion.getBoundsInLocal().getWidth() != -1) {
                     System.out.println("esta en colicion");
@@ -259,8 +259,7 @@ public class LoopJuego extends AnimationTimer {
             //Acciones de teclado
             if (marca == "RIGHT") {
                 lapiz.drawImage(ninjaImD, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
-            }
-            if (marca == "LEFT") {
+            } else if (marca == "LEFT") {
                 lapiz.drawImage(ninjaImI, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
             }
 
@@ -272,31 +271,28 @@ public class LoopJuego extends AnimationTimer {
                 //            System.out.println("ABS: " + ninja.getxAbs());
                 ninja.moverIzquierda();
                 lapiz.drawImage(ninjaImI, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
-            }
-            if (pulsacionTeclado.contains("RIGHT")) {
+            } else if (pulsacionTeclado.contains("RIGHT")) {
                 marca = "RIGHT";
                 ninja.setxAbs(ninja.getxAbs() + 2);
                 //System.out.println(ninja.getXref());
                 //System.out.println("ABS: " + ninja.getxAbs());
                 ninja.moverDerecha();
                 lapiz.drawImage(ninjaImD, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
+            } else if (pulsacionTeclado.contains("DOWN")) {
+                ninja.moverAbajo();
             }
-            if ((pulsacionTeclado.contains("UP")) && (ninja.getYref() == 455.0)) {
-                salto = 20;
-
-            }
+            
             if (salto > 0) {
                 ninja.saltarmoviendose();
                 if (marca == "RIGHT") {
                     lapiz.drawImage(ninjaImD, 32, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
-                }
-                if (marca == "LEFT") {
+                } else if (marca == "LEFT") {
                     lapiz.drawImage(ninjaImI, 32, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
                 }
                 this.salto--;
             }
-            if (pulsacionTeclado.contains("DOWN")) {
-                ninja.moverAbajo();
+            if ((pulsacionTeclado.contains("UP")) && (ninja.getYref() == 455.0)) {
+                salto = 20;
             }
 
             //imagen de la puntuacion
@@ -304,14 +300,28 @@ public class LoopJuego extends AnimationTimer {
             lapiz.strokeText("= " + vidas, 72, 17);
 
             this.numero++;
+            /*if (vidas==0) {
+                lapiz.drawImage(ninjaImD, 32 * this.secuencia, 129, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
+            }*/
             if (tiempovida > 0) {
                 tiempovida--;
                 //Animaciones en negativo    
                 if (marca == "RIGHT") {
                     lapiz.drawImage(ninjaImDN, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
-                }
-                if (marca == "LEFT") {
+                }else if (marca == "LEFT") {
                     lapiz.drawImage(ninjaImIN, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
+                }
+                if (salto > 0) {
+                    ninja.saltarmoviendose();
+                    if (marca == "RIGHT") {
+                        lapiz.drawImage(ninjaImDN, 32, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
+                    } else if (marca == "LEFT") {
+                        lapiz.drawImage(ninjaImIN, 32, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
+                    }
+                    this.salto--;
+                }
+                if ((pulsacionTeclado.contains("UP")) && (ninja.getYref() == 455.0)) {
+                    salto = 20;
                 }
             }
         } else {
