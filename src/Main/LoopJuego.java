@@ -159,7 +159,7 @@ public class LoopJuego extends AnimationTimer {
             Shape sMinotauro = new Rectangle(minotauro.getXref() + 30, minotauro.getYref() + 10, 23, 35);
             Shape sHongo = new Rectangle(hongo.getXref(), hongo.getYref(), 25, 25);
             Shape sMinotauro2 = new Rectangle(minotauro2.getXref() + 30, minotauro2.getYref() + 10, 23, 35);
-            //Permite dibujar una imagen de fondo
+            
             //permite hacer que el escenario vaya moviendose en la ubicación 
             //*********************************ESCENA 1************************
             if (ninja.getxAbs() < 796) {
@@ -315,16 +315,24 @@ public class LoopJuego extends AnimationTimer {
                 Shape pared = new Rectangle(4, 0, 2, 500);
                 Shape pared2 = new Rectangle(804, 0, 2, 500);
 
+                Shape h1 = new Rectangle(180, 491, 22, 22);
+                Shape h2 = new Rectangle(680, 491, 22, 22);
                 Shape interseccion = SVGPath.intersect(sNinja, pared);
                 Shape interseccion2 = SVGPath.intersect(sNinja, pared2);
                 Shape interse = SVGPath.intersect(sMinotauro, pared);
                 Shape interse2 = SVGPath.intersect(sMinotauro, pared2);
                 Shape intersemin = SVGPath.intersect(sMinotauro2, pared);
                 Shape intersemin2 = SVGPath.intersect(sMinotauro2, pared2);
+                Shape interh1 = SVGPath.intersect(sNinja, h1);
+                Shape interh2 = SVGPath.intersect(sNinja, h2);
                 Shape intersecmin = SVGPath.intersect(sNinja, sMinotauro);
                 Shape intersecmin2 = SVGPath.intersect(sNinja, sMinotauro2);
 
                 lapiz.drawImage(fondo3, 0, 0, 492, 233, 0, 0, 796, 520);
+                
+                ////////////hongos que no se mueven de posiscion/////////////
+                lapiz.drawImage(cepamala, 128 + 16*secuencia2 ,130, 16, 16, 680, 491, 22 ,22);
+                lapiz.drawImage(cepamala, 128 + 16*secuencia2 ,130, 16, 16, 180, 491, 22 ,22);
                 
                 //////movimientos minotauro 1////////7
                 if (!comprobacion2) {
@@ -364,6 +372,18 @@ public class LoopJuego extends AnimationTimer {
 
                 if (intersecmin2.getBoundsInLocal().getWidth() != -1 && tiempovida == 0) {
                     System.out.println("Se ha chocado con el minotauro2");
+                    vidas--;
+                    tiempovida = 50;
+                }
+                
+                if (interh1.getBoundsInLocal().getWidth() != -1 && tiempovida == 0) {
+                    System.out.println("Se ha chocado con un minihongo");
+                    vidas--;
+                    tiempovida = 50;
+                }
+                
+                if (interh2.getBoundsInLocal().getWidth() != -1 && tiempovida == 0) {
+                    System.out.println("Se ha chocado con un minihongo");
                     vidas--;
                     tiempovida = 50;
                 }
