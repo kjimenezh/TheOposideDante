@@ -68,7 +68,8 @@ public class LoopJuego extends AnimationTimer {
         this.escena = escena;
         this.ninja = new Personaje(0.0, 420.0, 40, 52, 0);//ubicación del ninjaImI
         this.esqueleto = new Enemigosimple(720, 478, 45, 57);//ubicacion del esqueleto
-        this.minotauro = new Enemigosimple(720, 450, 97, 46);
+        this.minotauro = new Enemigosimple(720, 450, 97, 46);//ubicacion del minotauro
+        
         this.heart = new Image("Images/heart.png");
         this.fondo = new Image("Images/CITY_MEGA sin fondo.png");
         this.fondo2 = new Image("Images/Nivel2.png");
