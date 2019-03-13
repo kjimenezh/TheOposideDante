@@ -28,15 +28,15 @@ public class PuntajeController {
     public void mostrarVista(){
         Singleton singleton = Singleton.getSingleton();
         
-        int a = 0;
-        for (Usuario user : modelo.getUsers()) {
+        int a = 1;
+        for (String key : modelo.getUsers().keySet()) {
             
-            view.getList().getItems().add(a + ": " + modelo.getUsers().get(a).getNombre() + ", " + modelo.getUsers().get(a).getScore());
+            view.getList().getItems().add(a + ": " + key + ", " + modelo.getUsers().get(key));
             a++;
         }      
      
         view.mostrar(singleton.getStage());
-    }
+   }
     
     class regresarEventHandler implements EventHandler<ActionEvent>{
  

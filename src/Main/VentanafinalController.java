@@ -16,6 +16,7 @@ import modelo.Usuario;
 public class VentanafinalController {
     private Modelo modelo;
     private Ventanafinal view;
+    private String score = "";
     
     public VentanafinalController(Modelo modelo) {
       this.modelo = modelo;
@@ -23,6 +24,10 @@ public class VentanafinalController {
        
       view.getRegistrar().setOnAction(new adicionarEvento()); 
       view.getRegresar().setOnAction(new regresarEvento());
+    }
+
+    public void setScore(String score) {
+        this.score = score;
     }
     
     public void mostrarVista(){
@@ -38,7 +43,6 @@ public class VentanafinalController {
             try {
                 controladormenu.mostrarVista();
             } catch (IOException ex) {
-                Logger.getLogger(VentanafinalController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -55,11 +59,12 @@ public class VentanafinalController {
           
             if(nombreUser.isEmpty()){
                 view.getMensaje().setText("Ingrese el nombre por favor :)");
-            return;
             }
             
-            Usuario user = new Usuario(nombreUser);
-            if(modelo.addUser(user)){
+            boolean b;
+            b = modelo.addUser(nombreUser, " ");
+            
+            if(b){
                 view.getMensaje().setText("Información agregada :)");
             }else{
                 view.getMensaje().setText("Ya existe la información");

@@ -5,25 +5,25 @@
  */
 package modelo;
 
-import java.util.ArrayList;
-import javafx.stage.Stage;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author gasilva
  */
 public class Modelo {
-    private ArrayList<Usuario> users;
+    private Map<String,String> users = null;
     
     public Modelo() {
-        this.users = new ArrayList<>();
+        this.users = new HashMap<>();
     }
     
-    public boolean addUser(Usuario user){
-        return this.users.add(user);
+    public boolean addUser(String name, String score){
+        return this.users.put(name, score) == null;
     }
     
-    public ArrayList<Usuario> getUsers() {
+    public Map<String,String> getUsers() {
         return users;
     }
 }
