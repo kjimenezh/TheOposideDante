@@ -479,7 +479,7 @@ public class LoopJuego extends AnimationTimer {
                 lapiz.drawImage(candyIm, 32 +  175* this.secuencia2, 226, 130, 113, this.Candy.get(i).getXref()+30, this.Candy.get(i).getYref(), 30, 27);
                 if ((interCandy.getBoundsInLocal().getWidth() != -1)) {
                     System.out.println("lo toco un dulce milagroso");
-                    puntaje = puntaje +10;
+                    puntaje = puntaje +50;
                     this.Candy.remove(i);
                     this.sCandy.remove(i);
                 }
