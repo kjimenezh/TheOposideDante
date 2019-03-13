@@ -50,6 +50,7 @@ public class LoopJuego extends AnimationTimer {
     private Image minota1;
     private Image minota2;
     private Image hongoim;
+    private Image candyIm;
     private boolean comprobacion = false;
     private boolean comprobacion2 = false;
     private boolean comprobacion3 = false;
@@ -74,7 +75,8 @@ public class LoopJuego extends AnimationTimer {
     private int puntaje = 0;
     private ArrayList<Enemigosimple> bombas;
     private ArrayList<Shape> sBombas;
-
+    private ArrayList<Enemigosimple> Candy;
+    private ArrayList<Shape> sCandy;
     public LoopJuego(Scene escena, GraphicsContext lapiz, Modelo modelo) {
 
         this.lapiz = lapiz;
@@ -99,9 +101,12 @@ public class LoopJuego extends AnimationTimer {
         this.minota2 = new Image("Images/minotaurus_spritesheet_lava IZQUIERDA sinfondo.png");
         this.ghost1 = new Image("Images/ghostDer.png");
         this.ghost2 = new Image("Images/ghostIzq.png");
+        this.candyIm = new Image("Images/candy.png");
         pulsacionTeclado = new ArrayList<>();
         this.bombas = new ArrayList<>();
         this.sBombas = new ArrayList<>();
+        this.sCandy = new ArrayList<>();
+        this.Candy = new ArrayList<>();
 
         escena.setOnKeyPressed(
                 new EventHandler<KeyEvent>() {
@@ -441,6 +446,15 @@ public class LoopJuego extends AnimationTimer {
                 Shape sBomba = new Rectangle(ghostX,20,26,27);
                 this.sBombas.add(sBomba);
             }
+            if (this.numero % 200 == 0) {
+                Enemigosimple Candy = new Enemigosimple(ghostX+10, 20, 30, 27);
+                this.Candy.add(Candy);
+                Shape sCandy = new Rectangle(ghostX+10,20,26,27);
+                this.sCandy.add(sCandy);
+            }
+            
+               
+            
             for (int i = 0; i < this.bombas.size(); i++) {
                 this.bombas.get(i).setYref(this.bombas.get(i).getYref()+1);
                 Shape sBomba = new Rectangle(this.bombas.get(i).getXref(),this.bombas.get(i).getYref(),26,27);
@@ -451,11 +465,27 @@ public class LoopJuego extends AnimationTimer {
                     System.out.println("lo toco un esqueleto del cielo");
                     vidas--;
                     tiempovida = 50;
-                }
-                if (this.bombas.get(i).getYref()>600) {
+                    if (this.bombas.get(i).getYref()>600) {
                     this.bombas.remove(i);
                     this.sBombas.remove(i);
                 }
+                }
+            }
+                for (int i = 0; i < this.Candy.size(); i++) {
+                this.Candy.get(i).setYref(this.Candy.get(i).getYref()+1);
+                Shape sCandy = new Rectangle(this.Candy.get(i).getXref()+30,this.Candy.get(i).getYref(),30,27);
+                this.sCandy.set(i, sCandy);
+                Shape interCandy = SVGPath.intersect(sNinja, this.sCandy.get(i));
+                lapiz.drawImage(candyIm, 32 +  175* this.secuencia2, 226, 130, 113, this.Candy.get(i).getXref()+30, this.Candy.get(i).getYref(), 30, 27);
+                if ((interCandy.getBoundsInLocal().getWidth() != -1)) {
+                    System.out.println("lo toco un dulce milagroso");
+                    puntaje = puntaje +10;
+                    this.Candy.remove(i);
+                    this.sCandy.remove(i);
+                }
+                
+                
+            
             }
             //******************************Acciones de teclado***********************************
             if (marca == "RIGHT") {
