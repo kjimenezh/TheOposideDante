@@ -55,7 +55,7 @@ public class LoopJuego extends AnimationTimer {
     private int secuencia3 = 0;
     private int numero;
     private int tiempovida = 0;
-    private int vidas = 3;
+    private int vidas = 5;
     private int contador = 100;
     private String marca = "RIGHT";
     private ArrayList<String> pulsacionTeclado = null;
@@ -129,7 +129,7 @@ public class LoopJuego extends AnimationTimer {
             controlador.mostrarVista();
             String score = String.valueOf(puntaje);
             controlador.setScore(score);
-            vidas = 3;
+            vidas = 5;
         } else if (!pausa) {
             lapiz.clearRect(0, 0, 1800, 520);
 
@@ -160,9 +160,9 @@ public class LoopJuego extends AnimationTimer {
             //shape del personaje
             Shape sNinja = new Rectangle(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho() - 5, ninja.getAlto());
             Shape sEsqueleto = new Rectangle(esqueleto.getXref(), esqueleto.getYref(), 23, 38);
-            Shape sMinotauro = new Rectangle(minotauro.getXref() + 30, minotauro.getYref() + 10, 23, 35);
+            Shape sMinotauro = new Rectangle(minotauro.getXref() + 25, minotauro.getYref() + 10, 28, 35);
             Shape sHongo = new Rectangle(hongo.getXref(), hongo.getYref(), 25, 25);
-            Shape sMinotauro2 = new Rectangle(minotauro2.getXref() + 30, minotauro2.getYref() + 10, 23, 35);
+            Shape sMinotauro2 = new Rectangle(minotauro2.getXref() + 25, minotauro2.getYref() + 10, 28, 35);
             
             //permite hacer que el escenario vaya moviendose en la ubicación 
             //*********************************ESCENA 1************************
@@ -441,10 +441,10 @@ public class LoopJuego extends AnimationTimer {
                 Shape sBomba = new Rectangle(this.bombas.get(i).getXref(),this.bombas.get(i).getYref(),26,27);
                 this.sBombas.set(i, sBomba);
                 Shape interEsquelet = SVGPath.intersect(sNinja, this.sBombas.get(i));
-                lapiz.drawImage(esqueletoim, 96 + 16 * this.secuencia2, 79, 16, 17, this.bombas.get(i).getXref(), this.bombas.get(i).getYref(), 26, 27);
+                lapiz.drawImage(esqueletoim, 191.5 + (16 * this.secuencia2), 3, 16.3, 23, this.bombas.get(i).getXref(), this.bombas.get(i).getYref(), 26.3, 33);
                 if ((interEsquelet.getBoundsInLocal().getWidth() != -1)&&(tiempovida==0)) {
                     System.out.println("lo toco un esqueleto del cielo");
-                    //vidas--;
+                    vidas--;
                     tiempovida = 50;
                 }
                 if (this.bombas.get(i).getYref()>600) {
