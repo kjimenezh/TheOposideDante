@@ -237,12 +237,12 @@ public class LoopJuego extends AnimationTimer {
                     tiempovida = 50;
                 }
                 //Activar pared2 escenario 
-                /*if (puntaje < 1000) {
+                if (puntaje < 1000) {
                     if (interseccion2.getBoundsInLocal().getWidth() != -1) {
                         ninja.setrefX(764);
                         ninja.setxAbs(762);
                     }
-                }*/
+                }
                 //*******************Escena 2**************************
             } else if (ninja.getxAbs() >= 796 && ninja.getxAbs() < 1592) {
                 if (ninja.getxAbs() == 796) {//796
