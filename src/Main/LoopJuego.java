@@ -291,7 +291,7 @@ public class LoopJuego extends AnimationTimer {
                 }
                 this.salto--;
             }
-            if ((pulsacionTeclado.contains("UP")) && (ninja.getYref() == 455.0)) {
+            if ((pulsacionTeclado.contains("SPACE")) && (ninja.getYref() == 455.0)) {
                 salto = 20;
             }
 
@@ -320,7 +320,7 @@ public class LoopJuego extends AnimationTimer {
                     }
                     this.salto--;
                 }
-                if ((pulsacionTeclado.contains("UP")) && (ninja.getYref() == 455.0)) {
+                if ((pulsacionTeclado.contains("SPACE")) && (ninja.getYref() == 455.0)) {
                     salto = 20;
                 }
             }
