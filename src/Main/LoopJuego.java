@@ -291,15 +291,10 @@ public class LoopJuego extends AnimationTimer {
                 }
                 
             }
-
-            //lapiz.strokeRect(ninja.getXref() + 5, ninja.getYref(), ninja.getAncho(), ninja.getAlto());
-            //Obstaculos (imagen)
-            //lapiz.fillRect(100, 100, 20, 20);
-            //lapiz.strokeRect(0, 507, 1800, 20);
+            
             //movimiento de "gravedad"
             ninja.moverAbajo();
-
-            //Validando colision
+            
             //Obstaculos(programados)
             Shape sObstaculo = new Rectangle(100, 100, 20, 20);
             Shape bObstaculo = new Rectangle(0, 503, 1800, 20);
@@ -403,6 +398,8 @@ public class LoopJuego extends AnimationTimer {
             //imagen de la salud actual
             lapiz.drawImage(heart, 0, 0, 64, 64, 50, 5, 20, 20);
             lapiz.strokeText("= " + vidas, 72, 17);
+            
+            lapiz.strokeText("Puntaje actual : " + puntaje, 600, 17);
 
             this.numero++;
         } else {
