@@ -37,6 +37,8 @@ public class LoopJuego extends AnimationTimer {
     private Image ninjaImDN;
     private Image ninjaImI;
     private Image ninjaImIN;
+    private Image ghost1;
+    private Image ghost2;
     private boolean comprobacion = false;
     private int secuencia = 0;
     private int secuencia2 = 0;
@@ -50,6 +52,10 @@ public class LoopJuego extends AnimationTimer {
     private int salto = 0; //Indicador del salto
     private boolean pausa = false; //Indicador de pausa
     private int debounceP = 0; //Antirrebote para la pausa
+    private int ghostX = 0;
+    private int secuenciaGhost = 0;
+    private int secuenciaGhost2 = 0;
+    private boolean ghostP = false;
 
     public LoopJuego(Scene escena, GraphicsContext lapiz, Modelo modelo) {
 
@@ -66,6 +72,8 @@ public class LoopJuego extends AnimationTimer {
         this.ninjaImI = new Image("Images/rogue spritesheet calciumtrice IZ.png");
         this.ninjaImIN = new Image("Images/rogue spritesheet calciumtrice IZnegativo.png");
         this.esqueletoim = new Image("Images/rpgcritter update formatted transparent.png");
+        this.ghost1 = new Image("Images/ghostDer.png");
+        this.ghost2 = new Image("Images/ghostIzq.png");
         pulsacionTeclado = new ArrayList<>();
 
         escena.setOnKeyPressed(
@@ -185,6 +193,7 @@ public class LoopJuego extends AnimationTimer {
                      System.out.println(interseccion2.getBoundsInLocal().getWidth());
                     
                }*/
+
                 if (!comprobacion) {
                     esqueleto.moverizquierda();
                     lapiz.drawImage(esqueletoim, 96 + 16 * this.secuencia2, 111, 16, 17, esqueleto.getXref(), esqueleto.getYref(), 26, 27);//animacion esqueleto
@@ -255,7 +264,45 @@ public class LoopJuego extends AnimationTimer {
             if (interseccion.getBoundsInLocal().getWidth() != -1) {
                 ninja.setrefY(455);
             }
-
+            
+            
+            ///////////////////////Ghost/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+            if (this.numero % 10 ==0) {
+                
+                if (this.secuenciaGhost == 3) {
+                    this.secuenciaGhost = 0;
+                } else {
+                    this.secuenciaGhost++;
+                }
+                
+                if (this.secuenciaGhost2 == 5) {
+                    this.secuenciaGhost2 = 0;
+                } else {
+                    this.secuenciaGhost2++;
+                }
+                
+            }
+            if (ghostX<ninja.getXref()) {
+                lapiz.drawImage(ghost1, 32*this.secuenciaGhost,64,32,32,ghostX,20,52,52);
+                ghostX++;
+                ghostP = false;
+            }
+            if (ghostX>ninja.getXref()) {
+                lapiz.drawImage(ghost2, 32*(this.secuenciaGhost+5),64,32,32,ghostX,20,52,52);
+                ghostX--;
+                ghostP = true;
+            }
+            if (ghostX==ninja.getXref()) {
+                if (ghostP) {
+                    lapiz.drawImage(ghost2, 32*(this.secuenciaGhost2+3),32,32,32,ghostX,20,52,52);
+                }else{
+                    lapiz.drawImage(ghost1, 32*this.secuenciaGhost2,32,32,32,ghostX,20,52,52);
+                }
+            }
+            ////////////////////////////////////////////////////////////////////////////////////////
+            
+            
             //Acciones de teclado
             if (marca == "RIGHT") {
                 lapiz.drawImage(ninjaImD, 32 * this.secuencia, 64, 32, 32, ninja.getXref(), ninja.getYref(), 52, 52);
