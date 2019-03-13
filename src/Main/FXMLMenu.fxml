@@ -14,9 +14,14 @@
          <image>
             <Image url="Images/inicio.png" />
          </image></ImageView>
-        <Button fx:id="button" layoutX="223.0" layoutY="160.0" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="364.0" text="Start!">
+        <Button fx:id="button" layoutX="223.0" layoutY="160.0" onAction="#InicioButtonAction" prefHeight="100.0" prefWidth="364.0" text="Iniciar">
          <font>
             <Font size="46.0" />
          </font></Button>
+      <Button layoutX="315.0" layoutY="274.0" mnemonicParsing="false" onAction="#PuntajeButtonAction" prefHeight="33.0" prefWidth="181.0" text="Puntajes">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

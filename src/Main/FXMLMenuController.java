@@ -20,16 +20,21 @@ import javafx.fxml.Initializable;
 public class FXMLMenuController implements Initializable {
     
     @FXML
-    private void handleButtonAction(ActionEvent event) throws IOException {
+    private void InicioButtonAction(ActionEvent event) throws IOException { //Cuando Inicio es oprimido
         System.out.println("Iniciando juego...");
         Modelo modelo = new Modelo();
         MenuController controller = new MenuController(modelo);
         controller.MenuButton();
     }
+    @FXML
+    private void PuntajeButtonAction(ActionEvent event){//Cuando Puntaje es oprimido
+        System.out.println("Puntaje");
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //NO TOCAR
     }    
     
 }
